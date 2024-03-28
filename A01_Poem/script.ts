@@ -1,5 +1,17 @@
-let object: string[] = ["the knight", "the queen"];
-let predicate: string[] = ["abuses", "rules over"];
-let subject: string[] = ["fire", "a lyre", "shire", "liar", "the squire"];
+namespace Poem {
+    let object: string[] = ["the knight", "the queen", "a beggar", "a dog", ""];
+    let predicate: string[] = ["abuses", "rules over", "manipulates", "annihilates", "feeds"];
+    let subject: string[] = ["fire", "a prior", "the shire", "a liar", "the squire"];
 
-console.log(subject[0])
+    console.log(getVerse(object, predicate, subject))
+
+    for(let i = object.length; i>=1; i--) {
+        getVerse()
+    }
+
+    function getVerse(_object: string[], _predicate: string[], _subject: string[]): string{
+        return "blub";
+    }
+
+    console.log()
+}
