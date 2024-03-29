@@ -10,7 +10,7 @@ namespace Poem {
   console.log(getVerse(object, predicate, subject));
 */
 
-  for (let i = object.length; i >= 1; i--) {
+  for (let i: number = object.length; i >= 1; i--) {
     //console.log(i);
     let verse: string = getVerse(subject, predicate, object);
     console.log(verse);
@@ -22,7 +22,7 @@ namespace Poem {
     verseAgain += _subject.splice(random, 1)[0] + " ";
     random = Math.floor(Math.random() * _predicate.length);
     verseAgain += _predicate.splice(random, 1)[0] + " ";
-    //console.log(math);
+    //console.log(random);
     random = Math.floor(Math.random() * _object.length);
     verseAgain += _object.splice(random, 1)[0];
     return verseAgain;
