@@ -21,7 +21,7 @@ var Poem;
         verseAgain += _subject.splice(random, 1)[0] + " ";
         random = Math.floor(Math.random() * _predicate.length);
         verseAgain += _predicate.splice(random, 1)[0] + " ";
-        //console.log(math);
+        //console.log(random);
         random = Math.floor(Math.random() * _object.length);
         verseAgain += _object.splice(random, 1)[0];
         return verseAgain;
