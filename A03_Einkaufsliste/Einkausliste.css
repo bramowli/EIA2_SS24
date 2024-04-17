@@ -1,0 +1,17 @@
+h1 {
+    font-size: x-large;
+    text-decoration: underline;
+}
+
+#new {
+    background-color: peru;
+    border-radius: 80%;
+}
+
+#container {
+    display: flex;
+}
+
+.item {
+    
+}
