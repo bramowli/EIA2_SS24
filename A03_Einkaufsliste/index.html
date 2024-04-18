@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,25 +8,40 @@
     <link rel="stylesheet" href="Einkaufsliste.css">
     <script src="Einkaufsliste.js"></script>
 </head>
+
 <body>
     <h1>Supermarkt-Safari</h1>
     <div id="container">
         <fieldset id="kaufen">
             <legend>Kaufen!</legend>
-            <div class="item"></div>
+            <div class="item">
+                <input type="checkbox" class="check">
+                <span>Klopapier</span>
+                <span>8</span>
+                <p>Blätter, unbenutzt</p>
+            </div>
         </fieldset>
         <fieldset id="Einträge">
             <legend>Einträge</legend>
             <div class="item">
-               <input type="checkbox" class="check"> 
-               <input type="text" name="Datalist" list="options" placeholder="Was willst du kaufen?"/>
-               <textarea name="Area" rows="3" placeholder="Wie viel davon?" class="Menge"></textarea>
-               <textarea name="Area" rows="3" placeholder="Kommentar" class="Kommentar"></textarea>
-               <span>Datum</span>
-               <button class="delete">x</button>
+                <input type="checkbox" class="check">
+                <div class="rightSide">
+                    <div class="upperHalf">
+                        <input type="text" name="Datalist" list="options" placeholder="Was willst du kaufen?"
+                            class="datalist" />
+                        <span>Datum</span>
+                        <button class="delete">x</button>
+                    </div>
+                    <div class="lowerHalf">
+                        <input type="number" name="Stepper" step="1" min="0" value="0" />
+                        <textarea name="Area" rows="3" placeholder="Kommentar" class="Kommentar"></textarea>
+                        <button>fertig</button>
+                    </div>
+                </div>
             </div>
         </fieldset>
     </div>
     <button id="new">+</button>
 </body>
+
 </html>
