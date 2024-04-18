@@ -3,17 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Supermarkt-Safari</title>
     <link rel="stylesheet" href="Einkaufsliste.css">
-    <script src="Einkausliste.js"></script>
+    <script src="Einkaufsliste.js"></script>
 </head>
 <body>
-    <h1></h1>
+    <h1>Supermarkt-Safari</h1>
     <div id="container">
         <fieldset id="kaufen">
             <legend>Kaufen!</legend>
+            <div class="item"></div>
         </fieldset>
-        <fieldset id="Einträge">Einträge</fieldset>
+        <fieldset id="Einträge">
+            <legend>Einträge</legend>
+            <div class="item">
+               <input type="checkbox" class="check"> 
+               <input type="text" name="Datalist" list="options" placeholder="Was willst du kaufen?"/>
+               <textarea name="Area" rows="3" placeholder="Wie viel davon?" class="Menge"></textarea>
+               <textarea name="Area" rows="3" placeholder="Kommentar" class="Kommentar"></textarea>
+               <span>Datum</span>
+               <button class="delete">x</button>
+            </div>
+        </fieldset>
     </div>
     <button id="new">+</button>
 </body>
