@@ -14,11 +14,13 @@
     <div id="container">
         <fieldset id="kaufen">
             <legend>Kaufen!</legend>
-            <div class="item">
+            <div id="testItem">
                 <input type="checkbox" class="check">
-                <span>Klopapier</span>
+                <span id="title">Klopapier</span>
                 <span>8</span>
                 <p>Blätter, unbenutzt</p>
+                <span>20.04.24</span>
+                <button class="delete">x</button>
             </div>
         </fieldset>
         <fieldset id="Einträge">
@@ -34,7 +36,7 @@
                     </div>
                     <div class="lowerHalf">
                         <input type="number" name="Stepper" step="1" min="0" value="0" />
-                        <textarea name="Area" rows="3" placeholder="Kommentar" class="Kommentar"></textarea>
+                        <textarea name="Area" rows="1" placeholder="Kommentar" class="Kommentar"></textarea>
                         <button>fertig</button>
                     </div>
                 </div>

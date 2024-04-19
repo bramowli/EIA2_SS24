@@ -1,5 +1,7 @@
 h1 {
     font-size: xx-large;
+    font-style: italic;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-decoration: underline;
 }
 
@@ -9,7 +11,7 @@ h1 {
     right: 4%;
     background-color: peru;
     border-radius: 50%;
-    font-size: xx-large;
+    font-size: 60px;
 }
 
 #container {
@@ -28,7 +30,14 @@ h1 {
     display: flex;
     border: 4px solid;
     display: flex;
-    height: 70px;
+    height: 10vh;
+    width: 100%;
+}
+
+#testItem {
+    display: grid;
+    grid-template-columns: 50px 50px auto auto;
+    border: 4px solid;
 }
 
 .datalist {
@@ -37,6 +46,7 @@ h1 {
 
 .check {
     flex-grow: 1;
+    width: 5%;
 }
 
 p {
@@ -45,7 +55,7 @@ p {
 
 .delete {
     border: 1px solid;
-    border-radius: 50%;
+    border-radius: 60px;
     top: 3px;
     right: 3px;
 }
@@ -55,6 +65,29 @@ p {
     flex-direction: column;
 }
 
-@media only screen and (min-width: 768px) {
+.Kommentar {
+    resize: none;
+}
 
+.upperHalf {
+    height: 60%;
+}
+
+.lowerHalf {
+    height: 40%;
+}
+
+@media only screen and (max-width: 700px) {
+    #container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #kaufen {
+        width: 95%;
+    }
+
+    #Einträge {
+        width: 95%;
+    }
 }
