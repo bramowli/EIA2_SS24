@@ -1,17 +1,25 @@
+body {
+    background-color: #5f310e;
+}
+
 h1 {
     font-size: xx-large;
     font-style: italic;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-decoration: underline;
+    color: #dcaa68;
 }
 
 #new {
     position: fixed;
     bottom: 4%;
     right: 4%;
-    background-color: peru;
+    width: auto;
+    height: auto;
+    background-color: #867d2c;
     border-radius: 50%;
     font-size: 60px;
+    border: none;
 }
 
 #container {
@@ -20,13 +28,113 @@ h1 {
 
 #kaufen {
     width: 50%;
+    border-color: #dcaa68;
+    color: #dcaa68;
+    font-size: x-large;
+    font-style: italic;
+    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 #Einträge {
+    border-color: #dcaa68;
+    color: #dcaa68;
     width: 50%;
+    font-size: x-large;
+    font-style: italic;
+    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .item {
+    display: flex;
+    align-items: center;
+    position: relative;
+    border: 4px solid;
+    padding: 4px;
+    border-color: #dcaa68;
+    background-color: #5f310e;
+    height: 90px;
+}
+
+.check {
+    align-self: center;
+    margin: 15px;
+    margin-right: 20px;
+    transform: scale(2);
+    background-color: #dcaa68;
+}
+
+.rightSide {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    height: 100%;
+}
+
+.upperHalf {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    height: 50%;
+}
+
+.lowerHalf {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    width: 100%;
+    height: 50%;
+    margin-bottom: 15px;
+}
+
+.datalist {
+    width: 150px;
+    font-size: x-large;
+}
+
+#newDatalist {
+    font-size: 15px;
+}
+
+.date {
+    font-size: small;
+}
+
+.delete {
+    background-color: #dcaa68;
+    margin: 5px;
+    border: none;
+    border-radius: 50%;
+    color: #5f310e;
+}
+
+.amount {
+    align-self: flex-end;
+    font-size: medium;
+}
+
+.Kommentar {
+    flex-grow: 2;
+    margin: 5px;
+    margin-bottom: 0px;
+    width: 150px;
+    resize: none;
+    font-size: medium;
+}
+
+#fertig {
+    background-color: #dcaa68;
+    border: none;
+    border-radius: 10%;
+    width: 50px;
+    height: 25px;
+    color: #5f310e;
+    font-weight: bold;
+}
+
+/*.item {
     display: flex;
     border: 4px solid;
     display: flex;
@@ -38,15 +146,6 @@ h1 {
     display: grid;
     grid-template-columns: 50px 50px auto auto;
     border: 4px solid;
-}
-
-.datalist {
-    flex-grow: 7;
-}
-
-.check {
-    flex-grow: 1;
-    width: 5%;
 }
 
 p {
@@ -76,7 +175,7 @@ p {
 .lowerHalf {
     height: 40%;
 }
-
+*/
 @media only screen and (max-width: 700px) {
     #container {
         display: flex;

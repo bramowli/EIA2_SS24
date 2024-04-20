@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Supermarkt-Safari</title>
     <link rel="stylesheet" href="Einkaufsliste.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <script src="Einkaufsliste.js"></script>
 </head>
 
@@ -14,36 +15,42 @@
     <div id="container">
         <fieldset id="kaufen">
             <legend>Kaufen!</legend>
-            <div id="testItem">
-                <input type="checkbox" class="check">
-                <span id="title">Klopapier</span>
-                <span>8</span>
-                <p>Blätter, unbenutzt</p>
-                <span>20.04.24</span>
-                <button class="delete">x</button>
-            </div>
-        </fieldset>
-        <fieldset id="Einträge">
-            <legend>Einträge</legend>
             <div class="item">
                 <input type="checkbox" class="check">
                 <div class="rightSide">
                     <div class="upperHalf">
-                        <input type="text" name="Datalist" list="options" placeholder="Was willst du kaufen?"
-                            class="datalist" />
-                        <span>Datum</span>
+                        <span class="datalist">Klopapier</span>
+                        <span class="date">20.04.24</span>
                         <button class="delete">x</button>
                     </div>
                     <div class="lowerHalf">
-                        <input type="number" name="Stepper" step="1" min="0" value="0" />
-                        <textarea name="Area" rows="1" placeholder="Kommentar" class="Kommentar"></textarea>
-                        <button>fertig</button>
+                        <span class="amount">8</span>
+                        <p class="Kommentar">Blätter, unbenutzt</p>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset id="Einträge">
+            <legend>Einträge</legend>
+            <div id="newItem" class="item">
+                <input type="checkbox" class="check">
+                <div class="rightSide">
+                    <div class="upperHalf">
+                        <input type="text" name="Datalist" list="options" placeholder="Was willst du kaufen?"
+                            class="datalist" id="newDatalist"/>
+                        <span class="date">Datum</span>
+                        <button class="delete">x</button>
+                    </div>
+                    <div class="lowerHalf">
+                        <input type="number" name="Stepper" step="1" min="0" value="0" class="amount"/>
+                        <textarea name="Area" rows="2" placeholder="Kommentar" class="Kommentar"></textarea>
+                        <button id="fertig">fertig</button>
                     </div>
                 </div>
             </div>
         </fieldset>
     </div>
-    <button id="new">+</button>
+    <button id="new"><i class="fa-solid fa-plus" style="color: #5f310e;"></i></button>
 </body>
 
 </html>
