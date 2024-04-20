@@ -6,14 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Supermarkt-Safari</title>
     <link rel="stylesheet" href="Einkaufsliste.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <script src="https://kit.fontawesome.com/60cbcb7156.js" crossorigin="anonymous"></script>
     <script src="Einkaufsliste.js"></script>
+    <link type="image/png" sizes="96x96" rel="icon" href="hippo-solid.svg">
 </head>
 
 <body>
-    <h1>Supermarkt-Safari</h1>
+    <div id="headline">
+        <i class="fa-solid fa-hippo"></i>
+        <h1>Supermarkt-Safari</h1>
+    </div>
     <div id="container">
-        <fieldset id="kaufen">
+        <fieldset id="kaufen" class="boxes">
             <legend>Kaufen!</legend>
             <div class="item">
                 <input type="checkbox" class="check">
@@ -21,7 +25,7 @@
                     <div class="upperHalf">
                         <span class="datalist">Klopapier</span>
                         <span class="date">20.04.24</span>
-                        <button class="delete">x</button>
+                        <i class="fa-solid fa-circle-xmark delete"></i>
                     </div>
                     <div class="lowerHalf">
                         <span class="amount">8</span>
@@ -29,28 +33,57 @@
                     </div>
                 </div>
             </div>
-        </fieldset>
-        <fieldset id="Einträge">
-            <legend>Einträge</legend>
-            <div id="newItem" class="item">
+            <div class="item">
                 <input type="checkbox" class="check">
                 <div class="rightSide">
                     <div class="upperHalf">
-                        <input type="text" name="Datalist" list="options" placeholder="Was willst du kaufen?"
-                            class="datalist" id="newDatalist"/>
-                        <span class="date">Datum</span>
-                        <button class="delete">x</button>
+                        <span class="datalist">Kind</span>
+                        <span class="date">20.04.24</span>
+                        <i class="fa-solid fa-circle-xmark delete"></i>
                     </div>
                     <div class="lowerHalf">
-                        <input type="number" name="Stepper" step="1" min="0" value="0" class="amount"/>
-                        <textarea name="Area" rows="2" placeholder="Kommentar" class="Kommentar"></textarea>
+                        <span class="amount">1</span>
+                        <p class="Kommentar">lebend oder noch frisch</p>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset id="Einträge" class="boxes">
+            <legend>Einträge</legend>
+            <div id="newItem" class="item">
+                <input type="checkbox" class="check" checked>
+                <div class="rightSide">
+                    <div class="upperHalf">
+                        <input type="text" name="Datalist" list="options" placeholder="Was willst du kaufen?"
+                            class="datalist" id="newDatalist" />
+                        <span class="date">Datum</span>
+                        <i class="fa-solid fa-circle-xmark delete"></i>
+                    </div>
+                    <div class="lowerHalf">
+                        <input type="number" name="Stepper" step="1" min="0" value="0" class="amount"
+                            style="width: 37px" ; />
+                        <textarea name="Area" rows="1" placeholder="Kommentar" class="Kommentar"></textarea>
                         <button id="fertig">fertig</button>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <input type="checkbox" class="check" checked>
+                <div class="rightSide">
+                    <div class="upperHalf">
+                        <span class="datalist">Wasser</span>
+                        <span class="date">09.09.09</span>
+                        <i class="fa-solid fa-circle-xmark delete"></i>
+                    </div>
+                    <div class="lowerHalf">
+                        <span class="amount">99</span>
+                        <p class="Kommentar">Tropfen</p>
                     </div>
                 </div>
             </div>
         </fieldset>
     </div>
-    <button id="new"><i class="fa-solid fa-plus" style="color: #5f310e;"></i></button>
+    <i id="new" class="fa-solid fa-circle-plus"></i>
 </body>
 
 </html>

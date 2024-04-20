@@ -2,6 +2,17 @@ body {
     background-color: #5f310e;
 }
 
+#headline {
+    display: flex;
+    align-items: center;
+}
+
+.fa-hippo {
+    font-size: xxx-large;
+    margin-right: 20px;
+    color: #867d2c;
+}
+
 h1 {
     font-size: xx-large;
     font-style: italic;
@@ -11,35 +22,24 @@ h1 {
 }
 
 #new {
+    background-color: #5f310e;
     position: fixed;
     bottom: 4%;
     right: 4%;
-    width: auto;
-    height: auto;
-    background-color: #867d2c;
     border-radius: 50%;
-    font-size: 60px;
-    border: none;
+    font-size: 80px;
+    border: 4px solid #54441b;
+    color: #867d2c;
 }
 
 #container {
     display: flex;
 }
 
-#kaufen {
+.boxes {
     width: 50%;
     border-color: #dcaa68;
     color: #dcaa68;
-    font-size: x-large;
-    font-style: italic;
-    font-weight: bold;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-#Einträge {
-    border-color: #dcaa68;
-    color: #dcaa68;
-    width: 50%;
     font-size: x-large;
     font-style: italic;
     font-weight: bold;
@@ -47,6 +47,7 @@ h1 {
 }
 
 .item {
+    margin: 10px;
     display: flex;
     align-items: center;
     position: relative;
@@ -84,6 +85,7 @@ h1 {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
+    flex-wrap: wrap;
     width: 100%;
     height: 50%;
     margin-bottom: 15px;
@@ -103,11 +105,8 @@ h1 {
 }
 
 .delete {
-    background-color: #dcaa68;
     margin: 5px;
-    border: none;
-    border-radius: 50%;
-    color: #5f310e;
+    color: #dcaa68;
 }
 
 .amount {
@@ -132,61 +131,17 @@ h1 {
     height: 25px;
     color: #5f310e;
     font-weight: bold;
+    margin-top: 5px;
 }
 
-/*.item {
-    display: flex;
-    border: 4px solid;
-    display: flex;
-    height: 10vh;
-    width: 100%;
-}
-
-#testItem {
-    display: grid;
-    grid-template-columns: 50px 50px auto auto;
-    border: 4px solid;
-}
-
-p {
-    margin: 3px;
-}
-
-.delete {
-    border: 1px solid;
-    border-radius: 60px;
-    top: 3px;
-    right: 3px;
-}
-
-.rightSide {
-    display: flex;
-    flex-direction: column;
-}
-
-.Kommentar {
-    resize: none;
-}
-
-.upperHalf {
-    height: 60%;
-}
-
-.lowerHalf {
-    height: 40%;
-}
-*/
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 720px) {
     #container {
         display: flex;
         flex-direction: column;
     }
 
-    #kaufen {
-        width: 95%;
-    }
-
-    #Einträge {
-        width: 95%;
+    .boxes {
+        max-width: 85vw;
+        width: 95vw;
     }
 }
