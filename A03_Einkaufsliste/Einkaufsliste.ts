@@ -1,28 +1,28 @@
 document.getElementById("new")?.addEventListener("click", newElement);
-document.getElementsByClassName("delete").addEventListener("click", deleteElement);
-document.getElementById("fertig")?.addEventListener("click", addElement)
-document.getElementsByClassName("check").addEventListener("click", changePosition)
-let elements = document.querySelectorAll('.delete')
+document.getElementById("fertig")?.addEventListener("click", addElement);
+let deletes: NodeListOf<Element> = document.querySelectorAll(".delete");
+let checked: NodeListOf<Element> = document.querySelectorAll(".check");
 
-elements.forEach(element => {
-    element.addEventListener('click', () => {
-        // Your event handling code here
-        console.log('Element clicked:', element);
-    });
-});
-
-function newElement(): any {
-    console.log("Mach was Neues!")
+for (let i: number = 0; i < deletes.length; i++) {
+  deletes[i].addEventListener("click", deleteElement);
 }
 
-function deleteElement(): any {
-    console.log("gelöscht")
+for (let i: number = 0; i < checked.length; i++) {
+  checked[i].addEventListener("click", changePosition);
 }
 
-function addElement(): any {
-    console.log("neuer Eintrag")
+function newElement(): void {
+  console.log("Mach was Neues!");
 }
 
-function changePosition(): any {
-    console.log("jetzt isses wo anders")
+function deleteElement(): void {
+  console.log("gelöscht");
+}
+
+function addElement(): void {
+  console.log("neuer Eintrag");
+}
+
+function changePosition(): void {
+  console.log("jetzt isses wo anders");
 }
