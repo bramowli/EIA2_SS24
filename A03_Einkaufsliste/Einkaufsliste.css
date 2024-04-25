@@ -91,12 +91,13 @@ h1 {
     margin-bottom: 15px;
 }
 
-.datalist {
+.name {
     width: 150px;
     font-size: x-large;
 }
 
-#newDatalist {
+.datalist {
+    width: 150px;
     font-size: 15px;
 }
 
