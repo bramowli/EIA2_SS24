@@ -1,29 +1,45 @@
-document.getElementById("new")?.addEventListener("click", newElement);
-document.getElementById("fertig")?.addEventListener("click", addElement);
-let deletes: NodeListOf<Element> = document.querySelectorAll(".delete");
-let checked: NodeListOf<Element> = document.querySelectorAll(".check");
+namespace Einkaufsliste {
+  document.addEventListener("load", handleLoad);
 
-// Loop to add eventListeners to every element of a class
-for (let i: number = 0; i < deletes.length; i++) { 
-  deletes[i].addEventListener("click", deleteElement);
-}
+  let deletes: NodeListOf<Element> = document.querySelectorAll(".delete");
+  let checked: NodeListOf<Element> = document.querySelectorAll(".check");
 
-for (let i: number = 0; i < checked.length; i++) {
-  checked[i].addEventListener("click", changePosition);
-}
+  function handleLoad() {
+    document.getElementById("new")?.addEventListener("click", newElement);
+    document.getElementById("fertig")?.addEventListener("click", addElement);
+    // Loop to add eventListeners to every element of a class
+    for (let i: number = 0; i < deletes.length; i++) {
+      deletes[i].addEventListener("click", deleteElement);
+    }
 
-function newElement(): void {
-  console.log("Mach was Neues!");
-}
+    for (let i: number = 0; i < checked.length; i++) {
+      checked[i].addEventListener("click", changePosition);
+    }
+    
+    generateContent
+  }
 
-function deleteElement(): void {
-  console.log("gelöscht");
-}
+  function generateContent(): any {
+    createItem
+  }
 
-function addElement(): void {
-  console.log("neuer Eintrag");
-}
+  function createItem(): any {
 
-function changePosition(): void {
-  console.log("jetzt isses wo anders");
+  }
+
+  function newElement(): void {
+    console.log("Mach was Neues!");
+  }
+
+  function deleteElement(): void {
+    console.log("gelöscht");
+  }
+
+  function addElement(): void {
+    console.log("neuer Eintrag");
+  }
+
+  function changePosition(): void {
+    console.log("jetzt isses wo anders");
+  }
 }
