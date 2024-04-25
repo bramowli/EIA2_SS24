@@ -85,15 +85,18 @@ namespace Einkaufsliste {
     lowerHalf.appendChild(add);
     add.setAttribute("id", "fertig");
     add.textContent = "fertig";
-    console.log("jrjz");
+
+    console.log(amount.value);
   }
 
   function newElement(): void {
     console.log("Mach was Neues!");
+    createItem()
   }
 
   function deleteElement(): void {
     console.log("gelöscht");
+    prompt("Bist du sicher?")
   }
 
   function addElement(): void {

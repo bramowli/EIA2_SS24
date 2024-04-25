@@ -71,13 +71,15 @@ var Einkaufsliste;
         lowerHalf.appendChild(add);
         add.setAttribute("id", "fertig");
         add.textContent = "fertig";
-        console.log("jrjz");
+        console.log(amount.value);
     }
     function newElement() {
         console.log("Mach was Neues!");
+        createItem();
     }
     function deleteElement() {
         console.log("gelöscht");
+        prompt("Bist du sicher?");
     }
     function addElement() {
         console.log("neuer Eintrag");
