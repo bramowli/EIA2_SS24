@@ -1,4 +1,12 @@
 namespace Einkaufsliste {
+  export interface liste{
+    datalist: string
+    date: number
+    amount: number
+    comment: string
+  }
+
+  
   export let items = [
     {
       datalist: "Klopapier",
