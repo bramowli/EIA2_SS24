@@ -1,40 +1,42 @@
+/// <reference path="Data.ts" />
+
 namespace Einkaufsliste {
   window.addEventListener("load", handleLoad);
+  logItems();
 
-  let itemCounter = 0;
-  let deletes: NodeListOf<Element> = document.querySelectorAll(".delete");
-  let checked: NodeListOf<Element> = document.querySelectorAll(".check");
+  const eintraege = document.querySelector("#Einträge") ?? new Element(); // if no element exists create new
+  const kaufen = document.querySelector("#kaufen") ?? new Element();
 
   function handleLoad() {
     document.getElementById("new")?.addEventListener("click", newElement);
-    document.getElementById("fertig")?.addEventListener("click", addElement);
-    // Loop to add eventListeners to every element of a class
-    for (let i: number = 0; i < deletes.length; i++) {
-      deletes[i].addEventListener("click", deleteElement);
-    }
-
-    for (let i: number = 0; i < checked.length; i++) {
-      checked[i].addEventListener("click", changePosition);
-    }
-
     generateContent();
   }
 
+  // create items from data
   function generateContent(): any {
-    createItem();
+    // create items for as long there is data for it
+    for (let i: number = 0; i < items.length; i++) {
+      // if array index is taken, increase counter
+      createItem(i, items[i], eintraege);
+    }
   }
 
-  function createItem(): any {
+  // create an item, either with data or without
+  function createItem(id: number, data: Listeneintrag | undefined, parent: Element): void {
+    console.log("create item: id=" + id);
+
     let item: HTMLDivElement = document.createElement("div");
-    document.querySelector("#Einträge")?.appendChild(item);
+    parent.appendChild(item);
     item.setAttribute("class", "item");
-    item.setAttribute("id", "item" + itemCounter);
+    item.setAttribute("id", "item-" + id);
 
     let checkbox: HTMLInputElement = document.createElement("input");
-    item.appendChild(checkbox);
     checkbox.setAttribute("class", "check");
     checkbox.type = "checkbox";
-    checkbox.value = "checked";
+    checkbox.name = "checkbox";
+    item.appendChild(checkbox);
+    checkbox.addEventListener("click", changePosition);
+    checkbox.checked = true;
 
     let rightSide: HTMLDivElement = document.createElement("div");
     item.appendChild(rightSide);
@@ -55,15 +57,19 @@ namespace Einkaufsliste {
     datalist.setAttribute("name", "Datalist");
     //datalist.list = "options";
     datalist.setAttribute("placeholder", "Was willst du kaufen?");
+    datalist.addEventListener("keydown", changeInput);
+    datalist.addEventListener("change", logItems);
 
     let date: HTMLSpanElement = document.createElement("span");
     upperHalf.appendChild(date);
     date.innerText = "" + new Date().toISOString().split("T")[0];
     date.setAttribute("class", "date");
+    date.setAttribute("id", "date-" + id);
 
     let xIcon: any = document.createElement("image");
     upperHalf.appendChild(xIcon);
     xIcon.classList.add("fa-solid", "fa-circle-xmark", "delete");
+    xIcon.addEventListener("click", deleteElement);
 
     let amount: HTMLInputElement = document.createElement("input");
     lowerHalf.appendChild(amount);
@@ -73,6 +79,7 @@ namespace Einkaufsliste {
     amount.value = "0";
     amount.setAttribute("step", "1");
     amount.setAttribute("style", "width:37px");
+    amount.addEventListener("change", changeInput);
 
     let comment: HTMLTextAreaElement = document.createElement("textarea");
     lowerHalf.appendChild(comment);
@@ -80,30 +87,80 @@ namespace Einkaufsliste {
     comment.setAttribute("name", "Area");
     comment.setAttribute("rows", "1");
     comment.setAttribute("placeholder", "Kommentar");
+    comment.addEventListener("keydown", changeTextArea);
 
-    let add: HTMLButtonElement = document.createElement("button");
-    lowerHalf.appendChild(add);
-    add.setAttribute("id", "fertig");
-    add.textContent = "fertig";
-
-    console.log(amount.value);
+    if (data) {
+      // if there is data, fill the fields with it
+      datalist.value = data.datalist;
+      date.innerText = data.date;
+      amount.value = data.amount.toString();
+      comment.value = data.comment;
+    }
   }
 
   function newElement(): void {
-    console.log("Mach was Neues!");
-    createItem()
+    console.log("create empty item");
+    let itemCounter: number = 0;
+    while (items[itemCounter]) itemCounter++;
+    createItem(itemCounter, undefined, eintraege);
+    const item: Listeneintrag = {
+      datalist: "",
+      date: new Date().toISOString().split("T")[0],
+      amount: 0,
+      comment: "",
+    };
+    items[itemCounter] = item;
+    logItems();
   }
 
-  function deleteElement(): void {
-    console.log("gelöscht");
-    prompt("Bist du sicher?")
+  function deleteElement(event: Event): any {
+    console.log("remove item");
+    if (!confirm("Bist du sicher?")) {
+      return;
+    }
+    const xIcon: HTMLImageElement = <HTMLImageElement>event.target;
+    const item: HTMLDivElement = <HTMLDivElement>xIcon.parentElement?.parentElement?.parentElement;
+    item.parentElement?.removeChild(item);
+    const id = Number(item.id.split("-")[1]);
+
+    items[id] = undefined;
+    logItems();
   }
 
-  function addElement(): void {
-    console.log("neuer Eintrag");
+  function changePosition(event: Event): void {
+    const checkbox: HTMLInputElement = <HTMLInputElement>event.target;
+    const item: HTMLDivElement = <HTMLDivElement>checkbox.parentElement;
+    item.parentElement?.removeChild(item);
+    if (checkbox.checked) {
+      eintraege.appendChild(item);
+      const id = Number(item.id.split("-")[1]);
+      const date: HTMLSpanElement = <HTMLSpanElement>document.querySelector("#date-" + id);
+      date.innerText = "" + new Date().toISOString().split("T")[0];
+      const itemData = items[id];
+      if (!itemData) return;
+      itemData.date = date.innerText;
+    } else {
+      kaufen.appendChild(item);
+    }
   }
 
-  function changePosition(): void {
-    console.log("jetzt isses wo anders");
+  function changeInput(event: Event): void {
+    const datalist: HTMLInputElement = <HTMLInputElement>event.target;
+    const item: HTMLDivElement = <HTMLDivElement>datalist.parentElement?.parentElement?.parentElement;
+    const id = Number(item.id.split("-")[1]);
+    const dataItem = items[id];
+    if (!dataItem) return;
+    dataItem.datalist = datalist.value;
+    //logItems();
+  }
+
+  function changeTextArea(event: Event): void {
+    const comment: HTMLTextAreaElement = <HTMLTextAreaElement>event.target;
+    const item: HTMLDivElement = <HTMLDivElement>comment.parentElement?.parentElement?.parentElement;
+    const id = Number(item.id.split("-")[1]);
+    const dataItem = items[id];
+    if (!dataItem) return;
+    dataItem.comment = comment.value;
+    //logItems();
   }
 }
