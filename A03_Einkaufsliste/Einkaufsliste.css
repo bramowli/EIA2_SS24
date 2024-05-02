@@ -1,148 +1,148 @@
 body {
-    background-color: #5f310e;
+  background-color: #5f310e;
 }
 
 #headline {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .fa-hippo {
-    font-size: xxx-large;
-    margin-right: 20px;
-    color: #867d2c;
+  font-size: xxx-large;
+  margin-right: 20px;
+  color: #867d2c;
 }
 
 h1 {
-    font-size: xx-large;
-    font-style: italic;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    text-decoration: underline;
-    color: #dcaa68;
+  font-size: xx-large;
+  font-style: italic;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-decoration: underline;
+  color: #dcaa68;
 }
 
 #new {
-    background-color: #5f310e;
-    position: fixed;
-    bottom: 4%;
-    right: 4%;
-    border-radius: 50%;
-    font-size: 80px;
-    border: 4px solid #54441b;
-    color: #867d2c;
+  background-color: #5f310e;
+  position: fixed;
+  bottom: 4%;
+  right: 4%;
+  border-radius: 50%;
+  font-size: 80px;
+  border: 4px solid #54441b;
+  color: #867d2c;
 }
 
 #container {
-    display: flex;
+  display: flex;
 }
 
 .boxes {
-    width: 50%;
-    border-color: #dcaa68;
-    color: #dcaa68;
-    font-size: x-large;
-    font-style: italic;
-    font-weight: bold;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 50%;
+  border-color: #dcaa68;
+  color: #dcaa68;
+  font-size: x-large;
+  font-style: italic;
+  font-weight: bold;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .item {
-    margin: 10px;
-    display: flex;
-    align-items: center;
-    position: relative;
-    border: 4px solid;
-    padding: 4px;
-    border-color: #dcaa68;
-    background-color: #5f310e;
-    height: 90px;
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  border: 4px solid;
+  padding: 4px;
+  border-color: #dcaa68;
+  background-color: #5f310e;
+  height: 90px;
 }
 
 .check {
-    align-self: center;
-    margin: 15px;
-    margin-right: 20px;
-    transform: scale(2);
-    background-color: #dcaa68;
+  align-self: center;
+  margin: 15px;
+  margin-right: 20px;
+  transform: scale(2);
+  background-color: #dcaa68;
 }
 
 .rightSide {
-    display: flex;
-    flex-direction: column;
-    width: 95%;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  height: 100%;
 }
 
 .upperHalf {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    width: 100%;
-    height: 50%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  height: 50%;
 }
 
 .lowerHalf {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    width: 100%;
-    height: 50%;
-    margin-bottom: 15px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 50%;
+  margin-bottom: 15px;
 }
 
 .name {
-    width: 150px;
-    font-size: x-large;
+  width: 150px;
+  font-size: x-large;
 }
 
 .datalist {
-    width: 150px;
-    font-size: 15px;
+  width: 150px;
+  font-size: 15px;
 }
 
 .date {
-    font-size: small;
+  font-size: small;
 }
 
 .delete {
-    margin: 5px;
-    color: #dcaa68;
+  margin: 5px;
+  color: #dcaa68;
 }
 
 .amount {
-    align-self: flex-end;
-    font-size: medium;
+  align-self: flex-end;
+  font-size: medium;
 }
 
 .comment {
-    flex-grow: 2;
-    margin: 5px;
-    margin-bottom: 0px;
-    width: 150px;
-    resize: none;
-    font-size: medium;
+  flex-grow: 2;
+  margin: 5px;
+  margin-bottom: 0px;
+  width: 150px;
+  resize: none;
+  font-size: medium;
 }
 
 #fertig {
-    background-color: #dcaa68;
-    border: none;
-    border-radius: 10%;
-    width: 50px;
-    height: 25px;
-    color: #5f310e;
-    font-weight: bold;
-    margin-top: 5px;
+  background-color: #dcaa68;
+  border: none;
+  border-radius: 10%;
+  width: 50px;
+  height: 25px;
+  color: #5f310e;
+  font-weight: bold;
+  margin-top: 5px;
 }
 
 @media only screen and (max-width: 720px) {
-    #container {
-        display: flex;
-        flex-direction: column;
-    }
+  #container {
+    display: flex;
+    flex-direction: column;
+  }
 
-    .boxes {
-        max-width: 85vw;
-        width: 95vw;
-    }
+  .boxes {
+    max-width: 85vw;
+    width: 95vw;
+  }
 }
