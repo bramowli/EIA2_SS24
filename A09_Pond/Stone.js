@@ -43,14 +43,5 @@ var Pond;
         }
     }
     Pond.Stone = Stone;
-    // ins hauptdong
-    function loop() {
-        const stone1 = new Stone({ x: 300, y: 300 }, 50, "bigStone");
-        stone1.draw();
-        const stone2 = new Stone({ x: 600, y: 100 }, 30, "bigStone");
-        stone2.draw();
-        // funktioniert das?
-        new Stone({ x: 600, y: 100 }, 30, "bigStone").draw();
-    }
 })(Pond || (Pond = {}));
 //# sourceMappingURL=Stone.js.map

@@ -13,6 +13,8 @@ var Pond;
         drawWall();
         drawTree();
         drawStones();
+        drawLilyPads();
+        drawBirds();
     }
     function drawHills(_position, _min, _max, color) {
         let stepMin = 115;
@@ -106,6 +108,10 @@ var Pond;
         Pond.crc.closePath();
         Pond.crc.fillStyle = "#bdb9b9";
         Pond.crc.fill();
+        Pond.crc.strokeStyle = "#aba9a9";
+        Pond.crc.lineWidth = 4;
+        Pond.crc.stroke();
+        // // for future details
         // const x = 10; // X-Position des Steins
         // const y = 10; // Y-Position des Steins
         // const width = 80; // Breite des Steins
@@ -135,5 +141,9 @@ var Pond;
         new Pond.Stone({ x: 220, y: 435 }, 1, "smallStone").draw();
         new Pond.Stone({ x: 210, y: 420 }, 1, "weirdStone").draw();
     }
+    function drawLilyPads() {
+        new Pond.LilyPad({ x: 400, y: 400 }, 1, true);
+    }
+    function drawBirds() { }
 })(Pond || (Pond = {}));
 //# sourceMappingURL=Pond.js.map

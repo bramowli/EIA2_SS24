@@ -23,7 +23,7 @@ namespace Pond {
         crc.beginPath();
         crc.moveTo(0, 0);
         crc.bezierCurveTo(0, -40, -70, -40, -70, 0);
-        crc.lineTo(0,0)
+        crc.lineTo(0, 0);
         crc.stroke();
       } else if (this.type === "smallStone") {
         crc.beginPath();
@@ -34,22 +34,12 @@ namespace Pond {
         crc.lineTo(10, 20);
         crc.arc(40, 30, 15, -Math.PI / 2, 0);
         crc.lineTo(15, 30);
-        crc.lineTo(10, 20)
+        crc.lineTo(10, 20);
         crc.stroke();
       }
       crc.closePath();
       crc.fill();
       crc.restore();
     }
-  }
-
-  // ins hauptdong
-  function loop() {
-    const stone1 = new Stone({ x: 300, y: 300 }, 50, "bigStone");
-    stone1.draw();
-    const stone2 = new Stone({ x: 600, y: 100 }, 30, "bigStone");
-    stone2.draw();
-    // funktioniert das?
-    new Stone({ x: 600, y: 100 }, 30, "bigStone").draw();
   }
 }

@@ -18,6 +18,8 @@ namespace Pond {
     drawWall();
     drawTree();
     drawStones();
+    drawLilyPads();
+    drawBirds();
   }
 
   function drawHills(_position: Vector, _min: number, _max: number, color: string): void {
@@ -139,6 +141,11 @@ namespace Pond {
     crc.closePath();
     crc.fillStyle = "#bdb9b9";
     crc.fill();
+    crc.strokeStyle = "#aba9a9";
+    crc.lineWidth = 4;
+    crc.stroke();
+
+    // // for future details
 
     // const x = 10; // X-Position des Steins
     // const y = 10; // Y-Position des Steins
@@ -169,9 +176,12 @@ namespace Pond {
     new Stone({ x: 770, y: 330 }, 1, "bigStone").draw();
     new Stone({ x: 710, y: 310 }, 1, "weirdStone").draw();
     new Stone({ x: 220, y: 435 }, 1, "smallStone").draw();
-
     new Stone({ x: 210, y: 420 }, 1, "weirdStone").draw();
-
-
   }
+
+  function drawLilyPads() {
+    new LilyPad({ x: 400, y: 400 }, 1, true);
+  }
+
+  function drawBirds() {}
 }
