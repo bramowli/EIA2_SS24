@@ -74,25 +74,25 @@ namespace Pond {
   }
 
   function drawTree() {
-    drawCrown();
     drawTrunk();
+    drawCrown();
   }
 
   function drawCrown() {
     crc.beginPath();
     crc.arc(0, 0, 200, 0, Math.PI * 2);
     crc.moveTo(0, 0);
-    crc.arc(180, 0, 40, 0, Math.PI * 2);
+    crc.arc(160, 0, 40, 0, Math.PI * 2);
     crc.moveTo(0, 0);
-    crc.arc(170, 50, 50, 0, Math.PI * 2);
+    crc.arc(160, 50, 50, 0, Math.PI * 2);
     crc.moveTo(0, 0);
-    crc.arc(155, 110, 40, 0, Math.PI * 2);
+    crc.arc(170, 110, 40, 0, Math.PI * 2);
     crc.moveTo(0, 0);
-    crc.arc(120, 150, 40, 0, Math.PI * 2);
+    crc.arc(135, 150, 40, 0, Math.PI * 2);
     crc.moveTo(0, 0);
-    crc.arc(60, 160, 60, 0, Math.PI * 2);
+    crc.arc(80, 170, 40, 0, Math.PI * 2);
     crc.moveTo(0, 0);
-    crc.arc(10, 190, 40, 0, Math.PI * 2);
+    crc.arc(20, 160, 60, 0, Math.PI * 2);
 
     crc.closePath();
 
@@ -100,5 +100,24 @@ namespace Pond {
     crc.fill();
   }
 
-  function drawTrunk() {}
+  function drawTrunk() {
+    crc.save();
+    crc.translate(0, 400);
+
+    crc.beginPath();
+    crc.lineTo(0, -200);
+    crc.lineTo(50, -200);
+    crc.bezierCurveTo(0, 0, 100, 0, 80, 0);
+    crc.lineTo(0, 0);
+
+    crc.moveTo(50,-120)
+    crc.arc(30, -120, 20, 0, Math.PI * 2)
+
+    crc.closePath();
+
+    crc.fillStyle = "#401c05";
+    crc.fill();
+
+    crc.restore();
+  }
 }
