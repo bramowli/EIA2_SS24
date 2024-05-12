@@ -20,6 +20,7 @@ namespace Pond {
     drawStones();
     drawLilyPads();
     drawBirds();
+    drawPetals();
   }
 
   function drawHills(_position: Vector, _min: number, _max: number, color: string): void {
@@ -184,4 +185,10 @@ namespace Pond {
   }
 
   function drawBirds() {}
+
+  function drawPetals() {
+    new Petal({ x: 200, y: 250 }, "lighter").draw();
+    new Petal({ x: 160, y: 220 }, "darker").draw();
+
+  }
 }

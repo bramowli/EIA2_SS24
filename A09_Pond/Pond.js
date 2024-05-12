@@ -15,6 +15,7 @@ var Pond;
         drawStones();
         drawLilyPads();
         drawBirds();
+        drawPetals();
     }
     function drawHills(_position, _min, _max, color) {
         let stepMin = 115;
@@ -145,5 +146,9 @@ var Pond;
         new Pond.LilyPad({ x: 400, y: 400 }, 1, true);
     }
     function drawBirds() { }
+    function drawPetals() {
+        new Pond.Petal({ x: 200, y: 250 }, "lighter").draw();
+        new Pond.Petal({ x: 160, y: 220 }, "darker").draw();
+    }
 })(Pond || (Pond = {}));
 //# sourceMappingURL=Pond.js.map
