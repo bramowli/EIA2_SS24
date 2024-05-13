@@ -14,6 +14,7 @@ var Pond;
         drawTree();
         drawStones();
         drawLilyPads();
+        drawReeds();
         drawBirds();
         drawPetals();
     }
@@ -143,12 +144,17 @@ var Pond;
         new Pond.Stone({ x: 210, y: 420 }, 1, "weirdStone").draw();
     }
     function drawLilyPads() {
-        new Pond.LilyPad({ x: 400, y: 400 }, 1, true);
+        new Pond.LilyPad({ x: 600, y: 400 }, 1, true).draw();
+        new Pond.LilyPad({ x: 630, y: 300 }, 1, false).draw();
+        new Pond.LilyPad({ x: 680, y: 420 }, 1, false).draw();
     }
     function drawBirds() { }
     function drawPetals() {
         new Pond.Petal({ x: 200, y: 250 }, "lighter").draw();
         new Pond.Petal({ x: 160, y: 220 }, "darker").draw();
+    }
+    function drawReeds() {
+        new Pond.Reed({ x: 500, y: 300 }, 1, true, "noLeaf");
     }
 })(Pond || (Pond = {}));
 //# sourceMappingURL=Pond.js.map

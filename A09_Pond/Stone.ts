@@ -2,7 +2,7 @@ namespace Pond {
   type stoneTypes = "bigStone" | "smallStone" | "weirdStone";
 
   export class Stone {
-    position: Vector; // kann man das nicht aus der hauptdatei entnehmen?
+    position: Vector; 
     size: number;
     type: stoneTypes;
 

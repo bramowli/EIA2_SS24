@@ -2,7 +2,7 @@
 var Pond;
 (function (Pond) {
     class Stone {
-        position; // kann man das nicht aus der hauptdatei entnehmen?
+        position;
         size;
         type;
         constructor(_position, _size, _type) {

@@ -19,6 +19,7 @@ namespace Pond {
     drawTree();
     drawStones();
     drawLilyPads();
+    drawReeds()
     drawBirds();
     drawPetals();
   }
@@ -181,7 +182,9 @@ namespace Pond {
   }
 
   function drawLilyPads() {
-    new LilyPad({ x: 400, y: 400 }, 1, true);
+    new LilyPad({ x: 600, y: 400 }, 1, true).draw();
+    new LilyPad({ x: 630, y: 300 }, 1, false).draw();
+    new LilyPad({ x: 680, y: 420 }, 1, false).draw();
   }
 
   function drawBirds() {}
@@ -189,6 +192,9 @@ namespace Pond {
   function drawPetals() {
     new Petal({ x: 200, y: 250 }, "lighter").draw();
     new Petal({ x: 160, y: 220 }, "darker").draw();
+  }
 
+  function drawReeds(){
+    new Reed({x: 500, y: 300},1, true, "noLeaf", )
   }
 }
