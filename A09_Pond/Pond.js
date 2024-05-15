@@ -148,13 +148,15 @@ var Pond;
         new Pond.LilyPad({ x: 630, y: 300 }, 1, false).draw();
         new Pond.LilyPad({ x: 680, y: 420 }, 1, false).draw();
     }
-    function drawBirds() { }
+    function drawReeds() {
+        new Pond.Reed({ x: 500, y: 300 }, 1, true, "noLeaf").draw();
+    }
+    function drawBirds() {
+        new Pond.Bird({ x: 400, y: 300 }, 1, "swimmingBird", "#ffffff", true).draw();
+    }
     function drawPetals() {
         new Pond.Petal({ x: 200, y: 250 }, "lighter").draw();
         new Pond.Petal({ x: 160, y: 220 }, "darker").draw();
-    }
-    function drawReeds() {
-        new Pond.Reed({ x: 500, y: 300 }, 1, true, "noLeaf");
     }
 })(Pond || (Pond = {}));
 //# sourceMappingURL=Pond.js.map

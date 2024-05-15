@@ -1,7 +1,7 @@
 "use strict";
 var Pond;
 (function (Pond) {
-    let endPoint;
+    let endPoint = { x: 0, y: 0 };
     class Reed {
         position;
         size;
@@ -25,15 +25,17 @@ var Pond;
             }
             else if (this.type === "twoLeaves") {
             }
+            Pond.crc.restore();
         }
         drawCatTail() {
             Pond.crc.save();
             Pond.crc.translate(endPoint.x, endPoint.y);
             Pond.crc.fillStyle = "#401c05";
             Pond.crc.beginPath();
-            Pond.crc.ellipse(0, 0, 10, 20, Math.PI * 1.5, 0, Math.PI * 2);
+            Pond.crc.ellipse(0, 0, 15, 5, Math.PI * 1.5, 0, Math.PI * 2);
             Pond.crc.closePath();
             Pond.crc.fill();
+            Pond.crc.restore();
         }
         goose() { }
     }

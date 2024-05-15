@@ -4,7 +4,7 @@ namespace Pond {
     y: number;
   }
   type ReedTypes = "noLeaf" | "oneLeaf" | "twoLeaves";
-  let endPoint: Vector;
+  let endPoint: Vector = { x: 0, y: 0 };
 
   export class Reed {
     position: Vector;
@@ -29,6 +29,7 @@ namespace Pond {
       } else if (this.type === "oneLeaf") {
       } else if (this.type === "twoLeaves") {
       }
+      crc.restore()
     }
     drawCatTail() {
       crc.save();
@@ -36,10 +37,11 @@ namespace Pond {
       crc.fillStyle = "#401c05";
 
       crc.beginPath();
-      crc.ellipse(0, 0, 10, 20, Math.PI * 1.5, 0, Math.PI * 2);
+      crc.ellipse(0, 0, 15, 5, Math.PI * 1.5, 0, Math.PI * 2);
 
       crc.closePath();
       crc.fill();
+      crc.restore();
     }
 
     goose() {}
