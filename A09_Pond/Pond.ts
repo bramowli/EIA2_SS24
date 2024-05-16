@@ -7,6 +7,7 @@ namespace Pond {
   window.addEventListener("load", handleLoad);
   let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
   export let crc: CanvasRenderingContext2D = canvas.getContext("2d");
+  let petals: Petal[] = [];
 
   crc.fillStyle = "#c0f2fa";
   crc.fillRect(0, 0, crc.canvas.width, crc.canvas.height);
@@ -22,6 +23,8 @@ namespace Pond {
     drawReeds();
     drawBirds();
     drawPetals();
+
+    setInterval(animate, 40);
   }
 
   function drawHills(_position: Vector, _min: number, _max: number, color: string): void {
@@ -196,7 +199,27 @@ namespace Pond {
   }
 
   function drawPetals() {
-    new Petal({ x: 200, y: 250 }, "lighter").draw();
-    new Petal({ x: 160, y: 220 }, "darker").draw();
+    // for having multiple petals
+    for (let i: number = 0; i < 10; i++) {
+      let color: petalColor;
+      let math: number = Math.random();
+      if (math <= 0.5) {
+        color = "lighter";
+      } else if (math > 0.5) {
+        color = "darker";
+      }
+      let newPetal: Petal = new Petal({ x: Math.random() * 200, y: Math.random() * 200 }, color);
+      petals.push(newPetal);
+      console.log(petals[9]);
+    }
+  }
+
+  // I need one for the other positions of all the new petals
+
+  function animate() {
+    for (let i: number = 0; i < 10; i++) {
+      petals[i].fall();
+      petals[i].draw();
+    }
   }
 }

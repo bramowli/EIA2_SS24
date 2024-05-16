@@ -4,6 +4,7 @@ var Pond;
     window.addEventListener("load", handleLoad);
     let canvas = document.querySelector("canvas");
     Pond.crc = canvas.getContext("2d");
+    let petals = [];
     Pond.crc.fillStyle = "#c0f2fa";
     Pond.crc.fillRect(0, 0, Pond.crc.canvas.width, Pond.crc.canvas.height);
     function handleLoad(_event) {
@@ -17,6 +18,7 @@ var Pond;
         drawReeds();
         drawBirds();
         drawPetals();
+        setInterval(animate, 40);
     }
     function drawHills(_position, _min, _max, color) {
         let stepMin = 115;
@@ -155,8 +157,27 @@ var Pond;
         new Pond.Bird({ x: 400, y: 300 }, 1, "swimmingBird", "#ffffff", true).draw();
     }
     function drawPetals() {
-        new Pond.Petal({ x: 200, y: 250 }, "lighter").draw();
-        new Pond.Petal({ x: 160, y: 220 }, "darker").draw();
+        // for having multiple petals
+        for (let i = 0; i < 10; i++) {
+            let color;
+            let math = Math.random();
+            if (math <= 0.5) {
+                color = "lighter";
+            }
+            else if (math > 0.5) {
+                color = "darker";
+            }
+            let newPetal = new Pond.Petal({ x: Math.random() * 200, y: Math.random() * 200 }, color);
+            petals.push(newPetal);
+            console.log(petals[9]);
+        }
+    }
+    // I need one for the other positions of all the new petals
+    function animate() {
+        for (let i = 0; i < 10; i++) {
+            petals[i].fall();
+            petals[i].draw();
+        }
     }
 })(Pond || (Pond = {}));
 //# sourceMappingURL=Pond.js.map

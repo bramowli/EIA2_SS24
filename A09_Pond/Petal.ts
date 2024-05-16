@@ -1,5 +1,5 @@
 namespace Pond {
-  type petalColor = "lighter" | "darker";
+  export type petalColor = "lighter" | "darker";
   export class Petal {
     position: Vector;
     color: string;
