@@ -5,6 +5,7 @@ var Pond;
     let canvas = document.querySelector("canvas");
     Pond.crc = canvas.getContext("2d");
     let petals = [];
+    let background;
     Pond.crc.fillStyle = "#c0f2fa";
     Pond.crc.fillRect(0, 0, Pond.crc.canvas.width, Pond.crc.canvas.height);
     function handleLoad(_event) {
@@ -16,6 +17,7 @@ var Pond;
         drawStones();
         drawLilyPads();
         drawReeds();
+        background = Pond.crc.getImageData(0, 0, canvas.width, canvas.height);
         drawBirds();
         drawPetals();
         setInterval(animate, 40);
@@ -175,6 +177,7 @@ var Pond;
     // I need one for the other positions of all the new petals
     function animate() {
         for (let i = 0; i < 10; i++) {
+            Pond.crc.putImageData(background, 0, 0);
             petals[i].fall();
             petals[i].draw();
         }

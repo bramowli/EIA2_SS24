@@ -9,8 +9,10 @@ var Pond;
             this.color = _color;
         }
         draw() {
+            // for(let i: number = 0; i<40; i++){
             Pond.crc.save();
-            Pond.crc.translate(this.position.x, this.position.y);
+            Pond.crc.translate(this.position.x + 5, this.position.y + 5);
+            //}
             Pond.crc.beginPath();
             Pond.crc.moveTo(0, 0);
             Pond.crc.bezierCurveTo(0, 0, 20, 15, 20, 5);
@@ -25,7 +27,10 @@ var Pond;
             Pond.crc.fill();
             Pond.crc.restore();
         }
-        fall() { }
+        fall() {
+            this.position.x += 5;
+            this.position.y += 5;
+        }
     }
     Pond.Petal = Petal;
 })(Pond || (Pond = {}));

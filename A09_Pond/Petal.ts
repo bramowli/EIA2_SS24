@@ -10,9 +10,12 @@ namespace Pond {
     }
 
     draw() {
-      crc.save();
-      crc.translate(this.position.x, this.position.y);
 
+      // for(let i: number = 0; i<40; i++){
+      crc.save();
+      crc.translate(this.position.x +5, this.position.y +5);
+      //}
+      
       crc.beginPath();
       crc.moveTo(0, 0);
       crc.bezierCurveTo(0, 0, 20, 15, 20, 5);
@@ -28,6 +31,11 @@ namespace Pond {
       crc.restore();
     }
 
-    fall() {}
+    fall() {
+      this.position.x += 5
+      this.position.y += 5
+
+      
+    }
   }
 }

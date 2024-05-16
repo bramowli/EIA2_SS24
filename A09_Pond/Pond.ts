@@ -8,6 +8,7 @@ namespace Pond {
   let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
   export let crc: CanvasRenderingContext2D = canvas.getContext("2d");
   let petals: Petal[] = [];
+  let background: ImageData
 
   crc.fillStyle = "#c0f2fa";
   crc.fillRect(0, 0, crc.canvas.width, crc.canvas.height);
@@ -21,6 +22,8 @@ namespace Pond {
     drawStones();
     drawLilyPads();
     drawReeds();
+    background = crc.getImageData(0,0,canvas.width, canvas.height)
+    
     drawBirds();
     drawPetals();
 
@@ -57,7 +60,7 @@ namespace Pond {
 
     crc.fillStyle = color;
     crc.fill();
-  }
+    }
 
   function drawGrass() {
     crc.fillStyle = "#7bad87";
@@ -218,6 +221,7 @@ namespace Pond {
 
   function animate() {
     for (let i: number = 0; i < 10; i++) {
+      crc.putImageData(background, 0,0)
       petals[i].fall();
       petals[i].draw();
     }

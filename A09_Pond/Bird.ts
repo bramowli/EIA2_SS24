@@ -21,21 +21,18 @@ namespace Pond {
 
       crc.fillStyle = this.color;
       crc.beginPath();
-      // zurückgehfail
-      // crc.moveTo(-40,0)
-      // crc.bezierCurveTo(-15, 7, -10, 5, 0, 0)
-      crc.moveTo(0,-8)
-      crc.bezierCurveTo(0,15, -40,15, -40,0)
-      crc.moveTo(-38,5)
-      crc.bezierCurveTo(-45,0, -45,-30, -40,-10)
-      crc.moveTo(-45,-15)
-      crc.ellipse(-45,-15, 7, 5,Math.PI * 2 , 0,Math.PI *2)
-      crc.moveTo(-38,-15)
-      crc.bezierCurveTo(-40,-15, -40,0, -35,0)// help
+      
+      crc.moveTo(0, -8);
+      crc.bezierCurveTo(0, 15, -40, 15, -40, 0);
+      crc.moveTo(-38, 5);
+      crc.bezierCurveTo(-45, 0, -45, -30, -40, -10);
+      crc.ellipse(-45, -15, 7, 5, Math.PI * 2, 0, Math.PI * 2);
+      crc.bezierCurveTo(-37, -15, -40, 0, -30, 0); 
+      crc.bezierCurveTo(-40,0, -10,-14, -2,0)
 
       crc.closePath();
-      crc.fill()
-      crc.restore()
+      crc.fill();
+      crc.restore();
     }
 
     move() {}

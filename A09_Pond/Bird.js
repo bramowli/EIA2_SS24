@@ -19,17 +19,13 @@ var Pond;
             Pond.crc.translate(this.position.x, this.position.y);
             Pond.crc.fillStyle = this.color;
             Pond.crc.beginPath();
-            // zurückgehfail
-            // crc.moveTo(-40,0)
-            // crc.bezierCurveTo(-15, 7, -10, 5, 0, 0)
             Pond.crc.moveTo(0, -8);
             Pond.crc.bezierCurveTo(0, 15, -40, 15, -40, 0);
             Pond.crc.moveTo(-38, 5);
             Pond.crc.bezierCurveTo(-45, 0, -45, -30, -40, -10);
-            Pond.crc.moveTo(-45, -15);
             Pond.crc.ellipse(-45, -15, 7, 5, Math.PI * 2, 0, Math.PI * 2);
-            Pond.crc.moveTo(-38, -15);
-            Pond.crc.bezierCurveTo(-40, -15, -40, 0, -35, 0); // help
+            Pond.crc.bezierCurveTo(-37, -15, -40, 0, -30, 0);
+            Pond.crc.bezierCurveTo(-40, 0, -10, -14, -2, 0);
             Pond.crc.closePath();
             Pond.crc.fill();
             Pond.crc.restore();
