@@ -5,10 +5,11 @@ namespace Pond {
   }
 
   window.addEventListener("load", handleLoad);
-  let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
-  export let crc: CanvasRenderingContext2D = canvas.getContext("2d");
+  export const canvas: HTMLCanvasElement | null = document.querySelector("canvas");
+  export const crc: CanvasRenderingContext2D = canvas.getContext("2d");
   let petals: Petal[] = [];
-  let background: ImageData
+  let birds: Bird[] = [];
+  let background: ImageData;
 
   crc.fillStyle = "#c0f2fa";
   crc.fillRect(0, 0, crc.canvas.width, crc.canvas.height);
@@ -22,8 +23,8 @@ namespace Pond {
     drawStones();
     drawLilyPads();
     drawReeds();
-    background = crc.getImageData(0,0,canvas.width, canvas.height)
-    
+    background = crc.getImageData(0, 0, canvas.width, canvas.height);
+
     drawBirds();
     drawPetals();
 
@@ -60,7 +61,7 @@ namespace Pond {
 
     crc.fillStyle = color;
     crc.fill();
-    }
+  }
 
   function drawGrass() {
     crc.fillStyle = "#7bad87";
@@ -194,16 +195,17 @@ namespace Pond {
   }
 
   function drawReeds() {
-    new Reed({ x: 500, y: 300 }, 1, true, "noLeaf").draw();
+    new Reed({ x: 550, y: 270 }, 1, true, "noLeaf").draw();
   }
 
   function drawBirds() {
-    new Bird({ x: 400, y: 300 }, 1, "swimmingBird", "#ffffff", true).draw();
+    birds.push(new Bird({ x: 400, y: 300 }, 1, "swimmingBird", "#ffffff", true));
+    birds.push(new Bird({ x: 450, y: 300 }, 0.5, "swimmingBird", "#e6d067", true));
   }
 
   function drawPetals() {
     // for having multiple petals
-    for (let i: number = 0; i < 10; i++) {
+    for (let i: number = 0; i < 30; i++) {
       let color: petalColor;
       let math: number = Math.random();
       if (math <= 0.5) {
@@ -211,19 +213,21 @@ namespace Pond {
       } else if (math > 0.5) {
         color = "darker";
       }
-      let newPetal: Petal = new Petal({ x: Math.random() * 200, y: Math.random() * 200 }, color);
-      petals.push(newPetal);
-      console.log(petals[9]);
+      petals.push(new Petal({ x: Math.random() * 200, y: Math.random() * 250 }, color));
+      //console.log(petals[i]);
     }
   }
 
-  // I need one for the other positions of all the new petals
-
   function animate() {
-    for (let i: number = 0; i < 10; i++) {
-      crc.putImageData(background, 0,0)
+    crc.putImageData(background, 0, 0);
+    drawBirds();
+    for (let i: number = 0; i < petals.length; i++) {
       petals[i].fall();
       petals[i].draw();
+    }
+    for (let j: number = 0; j < birds.length; j++) {
+      birds[j].move();
+      birds[j].draw();
     }
   }
 }

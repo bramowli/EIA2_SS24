@@ -4,15 +4,15 @@ var Pond;
     class Petal {
         position;
         color;
+        startPosition;
         constructor(_position, _color) {
-            this.position = _position;
+            this.position = { x: _position.x, y: _position.y };
+            this.startPosition = { x: _position.x, y: _position.y };
             this.color = _color;
         }
         draw() {
-            // for(let i: number = 0; i<40; i++){
             Pond.crc.save();
-            Pond.crc.translate(this.position.x + 5, this.position.y + 5);
-            //}
+            Pond.crc.translate(this.position.x, this.position.y);
             Pond.crc.beginPath();
             Pond.crc.moveTo(0, 0);
             Pond.crc.bezierCurveTo(0, 0, 20, 15, 20, 5);
@@ -28,8 +28,11 @@ var Pond;
             Pond.crc.restore();
         }
         fall() {
-            this.position.x += 5;
-            this.position.y += 5;
+            this.position.x += 2 + Math.random() * 5;
+            this.position.y += 2 + Math.random() * 5;
+            if (this.position.y >= Pond.canvas.height) {
+                this.position = { x: this.startPosition.x, y: this.startPosition.y };
+            }
         }
     }
     Pond.Petal = Petal;

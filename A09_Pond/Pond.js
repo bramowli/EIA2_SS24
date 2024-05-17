@@ -2,9 +2,10 @@
 var Pond;
 (function (Pond) {
     window.addEventListener("load", handleLoad);
-    let canvas = document.querySelector("canvas");
-    Pond.crc = canvas.getContext("2d");
+    Pond.canvas = document.querySelector("canvas");
+    Pond.crc = Pond.canvas.getContext("2d");
     let petals = [];
+    let birds = [];
     let background;
     Pond.crc.fillStyle = "#c0f2fa";
     Pond.crc.fillRect(0, 0, Pond.crc.canvas.width, Pond.crc.canvas.height);
@@ -17,7 +18,7 @@ var Pond;
         drawStones();
         drawLilyPads();
         drawReeds();
-        background = Pond.crc.getImageData(0, 0, canvas.width, canvas.height);
+        background = Pond.crc.getImageData(0, 0, Pond.canvas.width, Pond.canvas.height);
         drawBirds();
         drawPetals();
         setInterval(animate, 40);
@@ -40,7 +41,7 @@ var Pond;
             let cpX2 = x - (stepMin + stepMax) / 8;
             let cpY2 = y;
             Pond.crc.bezierCurveTo(cpX1, cpY1, cpX2, cpY2, x, y);
-        } while (x < canvas.width);
+        } while (x < Pond.canvas.width);
         Pond.crc.lineTo(x, 0);
         Pond.crc.closePath();
         Pond.crc.fillStyle = color;
@@ -48,7 +49,7 @@ var Pond;
     }
     function drawGrass() {
         Pond.crc.fillStyle = "#7bad87";
-        Pond.crc.fillRect(0, 0, canvas.width, canvas.height);
+        Pond.crc.fillRect(0, 0, Pond.canvas.width, Pond.canvas.height);
         Pond.crc.restore();
     }
     function drawPond(_position) {
@@ -153,14 +154,15 @@ var Pond;
         new Pond.LilyPad({ x: 680, y: 420 }, 1, false).draw();
     }
     function drawReeds() {
-        new Pond.Reed({ x: 500, y: 300 }, 1, true, "noLeaf").draw();
+        new Pond.Reed({ x: 550, y: 270 }, 1, true, "noLeaf").draw();
     }
     function drawBirds() {
-        new Pond.Bird({ x: 400, y: 300 }, 1, "swimmingBird", "#ffffff", true).draw();
+        birds.push(new Pond.Bird({ x: 400, y: 300 }, 1, "swimmingBird", "#ffffff", true));
+        birds.push(new Pond.Bird({ x: 450, y: 300 }, 0.5, "swimmingBird", "#e6d067", true));
     }
     function drawPetals() {
         // for having multiple petals
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 30; i++) {
             let color;
             let math = Math.random();
             if (math <= 0.5) {
@@ -169,17 +171,20 @@ var Pond;
             else if (math > 0.5) {
                 color = "darker";
             }
-            let newPetal = new Pond.Petal({ x: Math.random() * 200, y: Math.random() * 200 }, color);
-            petals.push(newPetal);
-            console.log(petals[9]);
+            petals.push(new Pond.Petal({ x: Math.random() * 200, y: Math.random() * 250 }, color));
+            //console.log(petals[i]);
         }
     }
-    // I need one for the other positions of all the new petals
     function animate() {
-        for (let i = 0; i < 10; i++) {
-            Pond.crc.putImageData(background, 0, 0);
+        Pond.crc.putImageData(background, 0, 0);
+        drawBirds();
+        for (let i = 0; i < petals.length; i++) {
             petals[i].fall();
             petals[i].draw();
+        }
+        for (let j = 0; j < birds.length; j++) {
+            birds[j].move();
+            birds[j].draw();
         }
     }
 })(Pond || (Pond = {}));

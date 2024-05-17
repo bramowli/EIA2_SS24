@@ -17,6 +17,7 @@ var Pond;
         draw() {
             Pond.crc.save();
             Pond.crc.translate(this.position.x, this.position.y);
+            Pond.crc.scale(this.size, this.size);
             Pond.crc.fillStyle = this.color;
             Pond.crc.beginPath();
             Pond.crc.moveTo(0, -8);
@@ -28,7 +29,28 @@ var Pond;
             Pond.crc.bezierCurveTo(-40, 0, -10, -14, -2, 0);
             Pond.crc.closePath();
             Pond.crc.fill();
+            this.drawBeak();
+            this.drawEye();
             Pond.crc.restore();
+        }
+        drawBeak() {
+            Pond.crc.translate(-50, -14);
+            Pond.crc.fillStyle = "#a86f32";
+            Pond.crc.beginPath();
+            Pond.crc.moveTo(0, 0);
+            Pond.crc.bezierCurveTo(0, 3, -9, 2, -9, -1);
+            Pond.crc.bezierCurveTo(-11, -4, 0, -2, 0, 0);
+            Pond.crc.closePath();
+            Pond.crc.fill();
+        }
+        drawEye() {
+            Pond.crc.translate(47, 12);
+            Pond.crc.fillStyle = "#000000";
+            Pond.crc.beginPath();
+            Pond.crc.moveTo(0, 0);
+            Pond.crc.arc(-45, -15, 1, Math.PI * 2, 0);
+            Pond.crc.closePath();
+            Pond.crc.fill();
         }
         move() { }
         change() { }

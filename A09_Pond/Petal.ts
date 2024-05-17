@@ -3,19 +3,18 @@ namespace Pond {
   export class Petal {
     position: Vector;
     color: string;
+    startPosition: Vector;
 
     constructor(_position: Vector, _color: petalColor) {
-      this.position = _position;
+      this.position = { x: _position.x, y: _position.y };
+      this.startPosition = { x: _position.x, y: _position.y };
       this.color = _color;
     }
 
     draw() {
-
-      // for(let i: number = 0; i<40; i++){
       crc.save();
-      crc.translate(this.position.x +5, this.position.y +5);
-      //}
-      
+      crc.translate(this.position.x, this.position.y);
+
       crc.beginPath();
       crc.moveTo(0, 0);
       crc.bezierCurveTo(0, 0, 20, 15, 20, 5);
@@ -32,10 +31,12 @@ namespace Pond {
     }
 
     fall() {
-      this.position.x += 5
-      this.position.y += 5
+      this.position.x += 2+ Math.random()*5;
+      this.position.y += 2 + Math.random()*5;
 
-      
+      if (this.position.y >= canvas.height) {
+        this.position = { x: this.startPosition.x, y: this.startPosition.y };
+      }
     }
   }
 }
