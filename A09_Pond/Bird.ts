@@ -13,7 +13,6 @@ namespace Pond {
       this.type = _type;
       this.color = _color;
       this.mirror = _mirror;
-      
     }
 
     draw() {
@@ -41,6 +40,9 @@ namespace Pond {
 
       this.drawBeak();
       this.drawEye();
+      if ("walkingBird") {//warum kriegt grad jeder beine?
+        this.drawLeg();
+      }
       crc.restore();
     }
 
@@ -71,21 +73,32 @@ namespace Pond {
       crc.fill();
     }
 
-    // warum darf ich nur eine richtung animieren? 
+    drawLeg() {
+      crc.translate(-10,8)
+      crc.fillStyle = "#a86f32";
+      crc.beginPath();
+      crc.moveTo(0,0)
+      crc.lineTo(0, 15);
+      crc.bezierCurveTo(-10,15, -10,12, -7,12)
+
+      crc.closePath();
+      crc.fill();
+    }
+
+    // warum darf ich nur eine richtung animieren?
     move() {
-      if (this.mirror===true){
+      if (this.mirror === true) {
         this.position.x -= 2;
 
         if (this.position.x >= canvas.width) {
-          this.position = { x: this.position.x += 2, y: this.position.y};
-      }else {
-        this.position.x += 2;
+          this.position = { x: (this.position.x += 2), y: this.position.y };
+        } else {
+          this.position.x += 2;
 
-        if (this.position.x >= canvas.width) {
-          this.position = { x: this.position.x -= 2, y: this.position.y};
+          if (this.position.x >= canvas.width) {
+            this.position = { x: (this.position.x -= 2), y: this.position.y };
           }
-      }
-     
+        }
       }
     }
 

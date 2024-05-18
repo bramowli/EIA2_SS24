@@ -36,6 +36,9 @@ var Pond;
             Pond.crc.fill();
             this.drawBeak();
             this.drawEye();
+            if ("walkingBird") { //warum kriegt grad jeder beine?
+                this.drawLeg();
+            }
             Pond.crc.restore();
         }
         drawBeak() {
@@ -57,17 +60,27 @@ var Pond;
             Pond.crc.closePath();
             Pond.crc.fill();
         }
-        // warum darf ich nur eine richtung animieren? 
+        drawLeg() {
+            Pond.crc.translate(-10, 8);
+            Pond.crc.fillStyle = "#a86f32";
+            Pond.crc.beginPath();
+            Pond.crc.moveTo(0, 0);
+            Pond.crc.lineTo(0, 15);
+            Pond.crc.bezierCurveTo(-10, 15, -10, 12, -7, 12);
+            Pond.crc.closePath();
+            Pond.crc.fill();
+        }
+        // warum darf ich nur eine richtung animieren?
         move() {
             if (this.mirror === true) {
                 this.position.x -= 2;
                 if (this.position.x >= Pond.canvas.width) {
-                    this.position = { x: this.position.x += 2, y: this.position.y };
+                    this.position = { x: (this.position.x += 2), y: this.position.y };
                 }
                 else {
                     this.position.x += 2;
                     if (this.position.x >= Pond.canvas.width) {
-                        this.position = { x: this.position.x -= 2, y: this.position.y };
+                        this.position = { x: (this.position.x -= 2), y: this.position.y };
                     }
                 }
             }

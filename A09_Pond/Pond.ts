@@ -196,6 +196,8 @@ namespace Pond {
 
   function drawReeds() {
     new Reed({ x: 550, y: 270 }, 1, true, "noLeaf").draw();
+    new Reed({ x: 560, y: 275 }, 1, true, "oneLeaf").draw();
+    new Reed({ x: 580, y: 270 }, 1, true, "twoLeaves").draw()
   }
 
   function drawBirds() {
@@ -203,6 +205,8 @@ namespace Pond {
     birds.push(new Bird({ x: 450, y: 300 }, 0.5, "swimmingBird", "#e6d067", true));
     birds.push(new Bird({ x: 500, y: 300 }, 0.5, "swimmingBird", "#e6d067", true));
     birds.push(new Bird({ x: 400, y: 350 }, 1, "swimmingBird", "#ffffff", false));
+    birds.push(new Bird({ x: 320, y: 250 }, 1, "walkingBird", "#ffffff", true));
+
   }
 
   function drawPetals() {
