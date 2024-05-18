@@ -17,7 +17,12 @@ var Pond;
         draw() {
             Pond.crc.save();
             Pond.crc.translate(this.position.x, this.position.y);
-            Pond.crc.scale(this.size, this.size);
+            if (this.mirror == false) {
+                Pond.crc.scale(-this.size, this.size);
+            }
+            else {
+                Pond.crc.scale(this.size, this.size);
+            }
             Pond.crc.fillStyle = this.color;
             Pond.crc.beginPath();
             Pond.crc.moveTo(0, -8);
@@ -52,7 +57,21 @@ var Pond;
             Pond.crc.closePath();
             Pond.crc.fill();
         }
-        move() { }
+        // warum darf ich nur eine richtung animieren? 
+        move() {
+            if (this.mirror === true) {
+                this.position.x -= 2;
+                if (this.position.x >= Pond.canvas.width) {
+                    this.position = { x: this.position.x += 2, y: this.position.y };
+                }
+                else {
+                    this.position.x += 2;
+                    if (this.position.x >= Pond.canvas.width) {
+                        this.position = { x: this.position.x -= 2, y: this.position.y };
+                    }
+                }
+            }
+        }
         change() { }
     }
     Pond.Bird = Bird;

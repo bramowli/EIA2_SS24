@@ -4,7 +4,6 @@ namespace Pond {
     y: number;
   }
   type ReedTypes = "noLeaf" | "oneLeaf" | "twoLeaves";
-  let endPoint: Vector 
 
   export class Reed {
     position: Vector;

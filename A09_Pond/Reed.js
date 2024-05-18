@@ -1,7 +1,6 @@
 "use strict";
 var Pond;
 (function (Pond) {
-    let endPoint;
     class Reed {
         position;
         size;

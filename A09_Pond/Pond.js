@@ -159,6 +159,8 @@ var Pond;
     function drawBirds() {
         birds.push(new Pond.Bird({ x: 400, y: 300 }, 1, "swimmingBird", "#ffffff", true));
         birds.push(new Pond.Bird({ x: 450, y: 300 }, 0.5, "swimmingBird", "#e6d067", true));
+        birds.push(new Pond.Bird({ x: 500, y: 300 }, 0.5, "swimmingBird", "#e6d067", true));
+        birds.push(new Pond.Bird({ x: 400, y: 350 }, 1, "swimmingBird", "#ffffff", false));
     }
     function drawPetals() {
         // for having multiple petals
@@ -177,14 +179,13 @@ var Pond;
     }
     function animate() {
         Pond.crc.putImageData(background, 0, 0);
-        drawBirds();
-        for (let i = 0; i < petals.length; i++) {
-            petals[i].fall();
-            petals[i].draw();
-        }
         for (let j = 0; j < birds.length; j++) {
             birds[j].move();
             birds[j].draw();
+        }
+        for (let i = 0; i < petals.length; i++) {
+            petals[i].fall();
+            petals[i].draw();
         }
     }
 })(Pond || (Pond = {}));

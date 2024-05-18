@@ -13,12 +13,17 @@ namespace Pond {
       this.type = _type;
       this.color = _color;
       this.mirror = _mirror;
+      
     }
 
     draw() {
       crc.save();
       crc.translate(this.position.x, this.position.y);
-      crc.scale(this.size, this.size);
+      if (this.mirror == false) {
+        crc.scale(-this.size, this.size);
+      } else {
+        crc.scale(this.size, this.size);
+      }
 
       crc.fillStyle = this.color;
       crc.beginPath();
@@ -66,7 +71,23 @@ namespace Pond {
       crc.fill();
     }
 
-    move() {}
+    // warum darf ich nur eine richtung animieren? 
+    move() {
+      if (this.mirror===true){
+        this.position.x -= 2;
+
+        if (this.position.x >= canvas.width) {
+          this.position = { x: this.position.x += 2, y: this.position.y};
+      }else {
+        this.position.x += 2;
+
+        if (this.position.x >= canvas.width) {
+          this.position = { x: this.position.x -= 2, y: this.position.y};
+          }
+      }
+     
+      }
+    }
 
     change() {}
   }

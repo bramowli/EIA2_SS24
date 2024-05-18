@@ -201,6 +201,8 @@ namespace Pond {
   function drawBirds() {
     birds.push(new Bird({ x: 400, y: 300 }, 1, "swimmingBird", "#ffffff", true));
     birds.push(new Bird({ x: 450, y: 300 }, 0.5, "swimmingBird", "#e6d067", true));
+    birds.push(new Bird({ x: 500, y: 300 }, 0.5, "swimmingBird", "#e6d067", true));
+    birds.push(new Bird({ x: 400, y: 350 }, 1, "swimmingBird", "#ffffff", false));
   }
 
   function drawPetals() {
@@ -220,14 +222,14 @@ namespace Pond {
 
   function animate() {
     crc.putImageData(background, 0, 0);
-    drawBirds();
-    for (let i: number = 0; i < petals.length; i++) {
-      petals[i].fall();
-      petals[i].draw();
-    }
     for (let j: number = 0; j < birds.length; j++) {
       birds[j].move();
       birds[j].draw();
     }
+    for (let i: number = 0; i < petals.length; i++) {
+      petals[i].fall();
+      petals[i].draw();
+    }
+    
   }
 }
