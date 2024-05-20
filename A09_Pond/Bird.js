@@ -36,7 +36,8 @@ var Pond;
             Pond.crc.fill();
             this.drawBeak();
             this.drawEye();
-            if ("walkingBird") { //warum kriegt grad jeder beine?
+            if (this.type === "walkingBird") {
+                //warum kriegt grad jeder beine?
                 this.drawLeg();
             }
             Pond.crc.restore();
@@ -61,29 +62,32 @@ var Pond;
             Pond.crc.fill();
         }
         drawLeg() {
-            Pond.crc.translate(-10, 8);
+            Pond.crc.translate(-10, 9.5);
             Pond.crc.fillStyle = "#a86f32";
             Pond.crc.beginPath();
             Pond.crc.moveTo(0, 0);
             Pond.crc.lineTo(0, 15);
-            Pond.crc.bezierCurveTo(-10, 15, -10, 12, -7, 12);
+            Pond.crc.bezierCurveTo(0, 17, -10, 17, -7, 15);
+            Pond.crc.bezierCurveTo(-10, 14, -10, 12, -7, 12);
+            Pond.crc.bezierCurveTo(-8, 12, -7, 9, -5, 12);
+            Pond.crc.lineTo(-5, 2);
             Pond.crc.closePath();
             Pond.crc.fill();
         }
-        // warum darf ich nur eine richtung animieren?
+        // wie rumdrehen auf teich?
         move() {
-            if (this.mirror === true) {
-                this.position.x -= 2;
-                if (this.position.x >= Pond.canvas.width) {
-                    this.position = { x: (this.position.x += 2), y: this.position.y };
-                }
-                else {
-                    this.position.x += 2;
-                    if (this.position.x >= Pond.canvas.width) {
-                        this.position = { x: (this.position.x -= 2), y: this.position.y };
-                    }
-                }
-            }
+            //   if (this.mirror === true) {
+            //     this.position.x -= 2;
+            //     if (this.position.x >= canvas.width) {
+            //       //this.position = { x: (this.position.x += 2), y: this.position.y };
+            //       this.position.x += 2
+            //     }
+            //   }else {
+            //     this.position.x += 2;
+            //     if (this.position.x >= canvas.width) {
+            //       this.position = { x: (this.position.x -= 2), y: this.position.y };
+            //     }
+            //   }
         }
         change() { }
     }
