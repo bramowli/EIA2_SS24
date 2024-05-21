@@ -25,20 +25,28 @@ var Pond;
             }
             Pond.crc.fillStyle = this.color;
             Pond.crc.beginPath();
-            Pond.crc.moveTo(0, -8);
-            Pond.crc.bezierCurveTo(0, 15, -40, 15, -40, 0);
-            Pond.crc.moveTo(-38, 5);
-            Pond.crc.bezierCurveTo(-45, 0, -45, -30, -40, -10);
-            Pond.crc.ellipse(-45, -15, 7, 5, Math.PI * 2, 0, Math.PI * 2);
-            Pond.crc.bezierCurveTo(-37, -15, -40, 0, -30, 0);
-            Pond.crc.bezierCurveTo(-40, 0, -10, -14, -2, 0);
-            Pond.crc.closePath();
-            Pond.crc.fill();
-            this.drawBeak();
-            this.drawEye();
-            if (this.type === "walkingBird") {
-                //warum kriegt grad jeder beine?
-                this.drawLeg();
+            if (this.type === "sleepingBird") {
+                Pond.crc.moveTo(0, -8);
+                Pond.crc.bezierCurveTo(0, 15, -40, 15, -40, 0);
+                Pond.crc.bezierCurveTo(-40, 0, -10, -14, -2, 0);
+                Pond.crc.closePath();
+                Pond.crc.fill();
+            }
+            else if (this.type === "swimmingBird" || this.type === "walkingBird") {
+                Pond.crc.moveTo(0, -8);
+                Pond.crc.bezierCurveTo(0, 15, -40, 15, -40, 0);
+                Pond.crc.moveTo(-38, 5);
+                Pond.crc.bezierCurveTo(-45, 0, -45, -30, -40, -10);
+                Pond.crc.ellipse(-45, -15, 7, 5, Math.PI * 2, 0, Math.PI * 2);
+                Pond.crc.bezierCurveTo(-37, -15, -40, 0, -30, 0);
+                Pond.crc.bezierCurveTo(-40, 0, -10, -14, -2, 0);
+                Pond.crc.closePath();
+                Pond.crc.fill();
+                this.drawBeak();
+                this.drawEye();
+                if (this.type === "walkingBird") {
+                    this.drawLeg();
+                }
             }
             Pond.crc.restore();
         }
@@ -74,20 +82,26 @@ var Pond;
             Pond.crc.closePath();
             Pond.crc.fill();
         }
-        // wie rumdrehen auf teich?
         move() {
-            //   if (this.mirror === true) {
-            //     this.position.x -= 2;
-            //     if (this.position.x >= canvas.width) {
-            //       //this.position = { x: (this.position.x += 2), y: this.position.y };
-            //       this.position.x += 2
-            //     }
-            //   }else {
-            //     this.position.x += 2;
-            //     if (this.position.x >= canvas.width) {
-            //       this.position = { x: (this.position.x -= 2), y: this.position.y };
-            //     }
-            //   }
+            let offset = 700;
+            if (this.type === "sleepingBird")
+                return;
+            if (this.type === "swimmingBird")
+                offset = 500;
+            if (this.mirror === true) {
+                this.position.x -= 2;
+                if (this.position.x <= Pond.canvas.width - offset) {
+                    this.mirror = false;
+                    this.position.x += 2;
+                }
+            }
+            else {
+                this.position.x += 2;
+                if (this.position.x >= Pond.canvas.width - 100) {
+                    this.mirror = true;
+                    this.position.x -= 2;
+                }
+            }
         }
         change() { }
     }

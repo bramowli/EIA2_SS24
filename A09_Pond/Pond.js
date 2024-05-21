@@ -159,11 +159,17 @@ var Pond;
         new Pond.Reed({ x: 580, y: 270 }, 1, true, "twoLeaves").draw();
     }
     function drawBirds() {
+        birds.push(new Pond.Bird({ x: 200, y: 230 }, 0.75, "walkingBird", "#996633", false));
+        birds.push(new Pond.Bird({ x: 240, y: 240 }, 0.75, "walkingBird", "#666633", false));
+        birds.push(new Pond.Bird({ x: 600, y: 440 }, 0.75, "swimmingBird", "#996633", true));
+        birds.push(new Pond.Bird({ x: 240, y: 400 }, 0.75, "swimmingBird", "#666633", false));
         birds.push(new Pond.Bird({ x: 400, y: 300 }, 1, "swimmingBird", "#ffffff", true));
         birds.push(new Pond.Bird({ x: 450, y: 300 }, 0.5, "swimmingBird", "#e6d067", true));
         birds.push(new Pond.Bird({ x: 500, y: 300 }, 0.5, "swimmingBird", "#e6d067", true));
+        birds.push(new Pond.Bird({ x: 550, y: 300 }, 0.5, "swimmingBird", "#e6d067", true));
         birds.push(new Pond.Bird({ x: 400, y: 350 }, 1, "swimmingBird", "#ffffff", false));
         birds.push(new Pond.Bird({ x: 320, y: 250 }, 1, "walkingBird", "#ffffff", true));
+        birds.push(new Pond.Bird({ x: 120, y: 450 }, 1, "sleepingBird", "#ffffff", true));
     }
     function drawPetals() {
         // for having multiple petals

@@ -27,23 +27,31 @@ namespace Pond {
       crc.fillStyle = this.color;
       crc.beginPath();
 
-      crc.moveTo(0, -8);
-      crc.bezierCurveTo(0, 15, -40, 15, -40, 0);
-      crc.moveTo(-38, 5);
-      crc.bezierCurveTo(-45, 0, -45, -30, -40, -10);
-      crc.ellipse(-45, -15, 7, 5, Math.PI * 2, 0, Math.PI * 2);
-      crc.bezierCurveTo(-37, -15, -40, 0, -30, 0);
-      crc.bezierCurveTo(-40, 0, -10, -14, -2, 0);
+      if (this.type === "sleepingBird") {
+        crc.moveTo(0, -8);
+        crc.bezierCurveTo(0, 15, -40, 15, -40, 0);
 
-      crc.closePath();
-      crc.fill();
-
-      this.drawBeak();
+        crc.bezierCurveTo(-40, 0, -10, -14, -2, 0);
+        crc.closePath();
+        crc.fill();
+        
+      } else if (this.type === "swimmingBird" || this.type=== "walkingBird") {
+        crc.moveTo(0, -8);
+        crc.bezierCurveTo(0, 15, -40, 15, -40, 0);
+        crc.moveTo(-38, 5);
+        crc.bezierCurveTo(-45, 0, -45, -30, -40, -10);
+        crc.ellipse(-45, -15, 7, 5, Math.PI * 2, 0, Math.PI * 2);
+        crc.bezierCurveTo(-37, -15, -40, 0, -30, 0);
+        crc.bezierCurveTo(-40, 0, -10, -14, -2, 0);
+        crc.closePath();
+        crc.fill();
+        this.drawBeak();
       this.drawEye();
-      if (this.type==="walkingBird") {
-        //warum kriegt grad jeder beine?
+      if (this.type === "walkingBird") {
         this.drawLeg();
       }
+      }
+
       crc.restore();
     }
 
@@ -89,20 +97,23 @@ namespace Pond {
       crc.fill();
     }
 
-    // wie rumdrehen auf teich?
     move() {
-      //   if (this.mirror === true) {
-      //     this.position.x -= 2;
-      //     if (this.position.x >= canvas.width) {
-      //       //this.position = { x: (this.position.x += 2), y: this.position.y };
-      //       this.position.x += 2
-      //     }
-      //   }else {
-      //     this.position.x += 2;
-      //     if (this.position.x >= canvas.width) {
-      //       this.position = { x: (this.position.x -= 2), y: this.position.y };
-      //     }
-      //   }
+      let offset = 700;
+      if (this.type === "sleepingBird") return;
+      if (this.type === "swimmingBird") offset = 500;
+      if (this.mirror === true) {
+        this.position.x -= 2;
+        if (this.position.x <= canvas.width - offset) {
+          this.mirror = false;
+          this.position.x += 2;
+        }
+      } else {
+        this.position.x += 2;
+        if (this.position.x >= canvas.width - 100) {
+          this.mirror = true;
+          this.position.x -= 2;
+        }
+      }
     }
 
     change() {}

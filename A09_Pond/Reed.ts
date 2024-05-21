@@ -19,40 +19,36 @@ namespace Pond {
     }
 
     draw() {
+      if (this.type === "noLeaf") {
+        this.drawStem();
+        this.drawCatTail();
+      } else if (this.type === "oneLeaf") {
+        this.drawStem();
+        this.drawCatTail();
+        this.drawLeaf1();
+      } else if (this.type === "twoLeaves") {
+        this.drawStem();
+        this.drawCatTail();
+      }
+    }
+    drawStem() {
       crc.save();
       crc.translate(this.position.x, this.position.y);
       crc.fillStyle = "#404f27";
-      if (this.type === "noLeaf") {
-        crc.beginPath();
-        crc.moveTo(0, 0);
-        crc.bezierCurveTo(0, -30, 10, -100, 40, -120);
-        crc.lineTo(45, -120);
-        crc.bezierCurveTo(15, -100, 5, -30, 5, 0);
-        crc.lineTo(0, 0);
-      } else if (this.type === "oneLeaf") {
-        crc.beginPath();
-        crc.moveTo(0, 0);
-        crc.bezierCurveTo(0, -30, 10, -100, 40, -120);
-        crc.lineTo(45, -120);
-        crc.bezierCurveTo(15, -100, 5, -30, 5, 0);
-        crc.lineTo(0, 0);
-        this.drawLeaf1()
-      } else if (this.type === "twoLeaves") {
-        crc.beginPath();
-        crc.moveTo(0, 0);
-        crc.bezierCurveTo(0, -30, 10, -100, 40, -120);
-        crc.lineTo(45, -120);
-        crc.bezierCurveTo(15, -100, 5, -30, 5, 0);
-        crc.lineTo(0, 0);
-      }
+      crc.beginPath();
+      crc.moveTo(0, 0);
+      crc.bezierCurveTo(0, -30, 10, -100, 40, -120);
+      crc.lineTo(45, -120);
+      crc.bezierCurveTo(15, -100, 5, -30, 5, 0);
+      crc.lineTo(0, 0);
       crc.closePath();
       crc.fill();
-      this.drawCatTail();
       crc.restore();
     }
+
     drawCatTail() {
       crc.save();
-      crc.translate(45, -128);
+      crc.translate(this.position.x + 45, this.position.y - 128);
       crc.fillStyle = "#401c05";
 
       crc.beginPath();
@@ -64,16 +60,17 @@ namespace Pond {
     }
     drawLeaf1() {
       crc.save();
-      crc.translate(15, -60);
+      crc.translate(this.position.x + 8, this.position.y - 50);
+      crc.fillStyle = "#404f27";
       crc.beginPath();
       crc.moveTo(0, 0);
-      crc.bezierCurveTo(0, 0, -5, -25, 15, -50);
+      crc.bezierCurveTo(10, -15, 15, -25, 30, -60);
+      crc.bezierCurveTo(10, -30, 15, -30, -2, 0);
 
       crc.closePath();
       crc.fill();
 
-      crc.restore()
-     
+      crc.restore();
     }
 
     goose() {}
