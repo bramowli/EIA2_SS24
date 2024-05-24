@@ -25,6 +25,8 @@ var Pond;
             else if (this.type === "twoLeaves") {
                 this.drawStem();
                 this.drawCatTail();
+                this.drawLeaf1();
+                this.drawLeaf2();
             }
         }
         drawStem() {
@@ -57,8 +59,20 @@ var Pond;
             Pond.crc.fillStyle = "#404f27";
             Pond.crc.beginPath();
             Pond.crc.moveTo(0, 0);
-            Pond.crc.bezierCurveTo(10, -15, 15, -25, 30, -60);
+            Pond.crc.bezierCurveTo(10, -8, 15, -25, 30, -60);
             Pond.crc.bezierCurveTo(10, -30, 15, -30, -2, 0);
+            Pond.crc.closePath();
+            Pond.crc.fill();
+            Pond.crc.restore();
+        }
+        drawLeaf2() {
+            Pond.crc.save();
+            Pond.crc.translate(this.position.x + 6, this.position.y - 20);
+            Pond.crc.fillStyle = "#404f27";
+            Pond.crc.beginPath();
+            Pond.crc.moveTo(0, 0);
+            Pond.crc.bezierCurveTo(-8, -8, -5, -35, 0, -80);
+            Pond.crc.bezierCurveTo(0, -30, 0, -30, 0, -4);
             Pond.crc.closePath();
             Pond.crc.fill();
             Pond.crc.restore();

@@ -154,9 +154,15 @@ var Pond;
         new Pond.LilyPad({ x: 680, y: 420 }, 1, false).draw();
     }
     function drawReeds() {
-        new Pond.Reed({ x: 550, y: 270 }, 1, true, "noLeaf").draw();
+        new Pond.Reed({ x: 550, y: 270 }, 1, true, "twoLeaves").draw();
         new Pond.Reed({ x: 560, y: 275 }, 1, true, "oneLeaf").draw();
-        new Pond.Reed({ x: 580, y: 270 }, 1, true, "twoLeaves").draw();
+        new Pond.Reed({ x: 570, y: 270 }, 1, true, "twoLeaves").draw();
+        new Pond.Reed({ x: 580, y: 280 }, 1, true, "twoLeaves").draw();
+        new Pond.Reed({ x: 588, y: 273 }, 1, true, "noLeaf").draw();
+        new Pond.Reed({ x: 598, y: 275 }, 1, true, "noLeaf").draw();
+        new Pond.Reed({ x: 605, y: 273 }, 1, true, "oneLeaf").draw();
+        new Pond.Reed({ x: 610, y: 280 }, 1, true, "twoLeaves").draw();
+        new Pond.Reed({ x: 223, y: 296 }, 1, true, "twoLeaves").draw();
     }
     function drawBirds() {
         birds.push(new Pond.Bird({ x: 200, y: 230 }, 0.75, "walkingBird", "#996633", false));
@@ -170,7 +176,7 @@ var Pond;
         birds.push(new Pond.Bird({ x: 400, y: 350 }, 1, "swimmingBird", "#ffffff", false));
         birds.push(new Pond.Bird({ x: 320, y: 250 }, 1, "walkingBird", "#ffffff", true));
         birds.push(new Pond.Bird({ x: 120, y: 435 }, 1, "sleepingBird", "#ffffff", true));
-        birds.push(new Pond.Bird({ x: 230, y: 420 }, 1, "eatingBird", "#ffffff", true));
+        birds.push(new Pond.Bird({ x: 220, y: 420 }, 1, "eatingBird", "#ffffff", false));
     }
     function drawPetals() {
         // for having multiple petals
@@ -197,6 +203,7 @@ var Pond;
             petals[i].fall();
             petals[i].draw();
         }
+        drawReeds();
     }
 })(Pond || (Pond = {}));
 //# sourceMappingURL=Pond.js.map

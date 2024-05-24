@@ -29,6 +29,8 @@ namespace Pond {
       } else if (this.type === "twoLeaves") {
         this.drawStem();
         this.drawCatTail();
+        this.drawLeaf1();
+        this.drawLeaf2();
       }
     }
     drawStem() {
@@ -64,8 +66,23 @@ namespace Pond {
       crc.fillStyle = "#404f27";
       crc.beginPath();
       crc.moveTo(0, 0);
-      crc.bezierCurveTo(10, -15, 15, -25, 30, -60);
+      crc.bezierCurveTo(10, -8, 15, -25, 30, -60);
       crc.bezierCurveTo(10, -30, 15, -30, -2, 0);
+
+      crc.closePath();
+      crc.fill();
+
+      crc.restore();
+    }
+
+    drawLeaf2() {
+      crc.save();
+      crc.translate(this.position.x + 6, this.position.y - 20);
+      crc.fillStyle = "#404f27";
+      crc.beginPath();
+      crc.moveTo(0, 0);
+      crc.bezierCurveTo(-8, -8, -5, -35, 0, -80);
+      crc.bezierCurveTo(0, -30, 0, -30, 0, -4);
 
       crc.closePath();
       crc.fill();

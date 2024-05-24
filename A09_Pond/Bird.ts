@@ -6,6 +6,7 @@ namespace Pond {
     type: birdTypes;
     color: string;
     mirror: boolean;
+    underWater: number;
 
     constructor(_position: Vector, _size: number, _type: birdTypes, _color: string, _mirror: boolean) {
       this.position = _position;
@@ -13,6 +14,7 @@ namespace Pond {
       this.type = _type;
       this.color = _color;
       this.mirror = _mirror;
+      this.underWater = -1;
     }
 
     draw() {
@@ -36,12 +38,10 @@ namespace Pond {
       } else if (this.type === "eatingBird") {
         crc.moveTo(15, 0);
         crc.bezierCurveTo(15, 0, 15, -25, -5, -25);
-        
+
         crc.bezierCurveTo(0, -25, -10, 0, -5, 0);
         crc.closePath();
         crc.fill();
-      
-
       } else if (this.type === "swimmingBird" || this.type === "walkingBird") {
         crc.moveTo(0, -8);
         crc.bezierCurveTo(0, 15, -40, 15, -40, 0);
@@ -106,11 +106,24 @@ namespace Pond {
 
     move() {
       let offset = 700;
+
       if (this.type === "sleepingBird") return;
-      if (this.type === "eatingBird") return;
-      if (this.type === "swimmingBird") offset = 500;
+      if (this.type === "swimmingBird") {
+        offset = 500;
+        if (Math.random() <= 0.001) {
+          this.type = "eatingBird";
+        }
+      }
+      if (this.type === "eatingBird") {
+        offset = 500;
+        this.underWater++;
+        if (this.underWater >= 50 && Math.random() >= 0.001) {
+          this.type = "swimmingBird";
+          this.underWater = -1;
+        }
+      }
       if (this.mirror === true) {
-        this.position.x -= 2;
+        this.position.x -= 1;
         if (this.position.x <= canvas.width - offset) {
           this.mirror = false;
           this.position.x += 2;

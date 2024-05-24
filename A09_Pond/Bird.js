@@ -7,12 +7,14 @@ var Pond;
         type;
         color;
         mirror;
+        underWater;
         constructor(_position, _size, _type, _color, _mirror) {
             this.position = _position;
             this.size = _size;
             this.type = _type;
             this.color = _color;
             this.mirror = _mirror;
+            this.underWater = -1;
         }
         draw() {
             Pond.crc.save();
@@ -93,12 +95,22 @@ var Pond;
             let offset = 700;
             if (this.type === "sleepingBird")
                 return;
-            if (this.type === "eatingBird")
-                return;
-            if (this.type === "swimmingBird")
+            if (this.type === "swimmingBird") {
                 offset = 500;
+                if (Math.random() <= 0.001) {
+                    this.type = "eatingBird";
+                }
+            }
+            if (this.type === "eatingBird") {
+                offset = 500;
+                this.underWater++;
+                if (this.underWater >= 50 && Math.random() >= 0.001) {
+                    this.type = "swimmingBird";
+                    this.underWater = -1;
+                }
+            }
             if (this.mirror === true) {
-                this.position.x -= 2;
+                this.position.x -= 1;
                 if (this.position.x <= Pond.canvas.width - offset) {
                     this.mirror = false;
                     this.position.x += 2;
