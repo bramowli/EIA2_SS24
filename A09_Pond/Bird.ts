@@ -1,5 +1,5 @@
 namespace Pond {
-  type birdTypes = "swimmingBird" | "walkingBird" | "kniveBird" | "sleepingBird";
+  type birdTypes = "swimmingBird" | "walkingBird" | "kniveBird" | "sleepingBird" | "eatingBird";
   export class Bird {
     position: Vector;
     size: number;
@@ -28,14 +28,21 @@ namespace Pond {
       crc.beginPath();
 
       if (this.type === "sleepingBird") {
-        crc.moveTo(0, -8);
-        crc.bezierCurveTo(0, 15, -40, 15, -40, 0);
-
-        crc.bezierCurveTo(-40, 0, -10, -14, -2, 0);
+        crc.moveTo(0, 0);
+        crc.bezierCurveTo(0, 15, -40, 15, -40, -4);
+        crc.bezierCurveTo(-40, 0, -10, -14, 0, 0);
         crc.closePath();
         crc.fill();
+      } else if (this.type === "eatingBird") {
+        crc.moveTo(15, 0);
+        crc.bezierCurveTo(15, 0, 15, -25, -5, -25);
         
-      } else if (this.type === "swimmingBird" || this.type=== "walkingBird") {
+        crc.bezierCurveTo(0, -25, -10, 0, -5, 0);
+        crc.closePath();
+        crc.fill();
+      
+
+      } else if (this.type === "swimmingBird" || this.type === "walkingBird") {
         crc.moveTo(0, -8);
         crc.bezierCurveTo(0, 15, -40, 15, -40, 0);
         crc.moveTo(-38, 5);
@@ -46,10 +53,10 @@ namespace Pond {
         crc.closePath();
         crc.fill();
         this.drawBeak();
-      this.drawEye();
-      if (this.type === "walkingBird") {
-        this.drawLeg();
-      }
+        this.drawEye();
+        if (this.type === "walkingBird") {
+          this.drawLeg();
+        }
       }
 
       crc.restore();
@@ -100,6 +107,7 @@ namespace Pond {
     move() {
       let offset = 700;
       if (this.type === "sleepingBird") return;
+      if (this.type === "eatingBird") return;
       if (this.type === "swimmingBird") offset = 500;
       if (this.mirror === true) {
         this.position.x -= 2;

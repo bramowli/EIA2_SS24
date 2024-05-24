@@ -26,9 +26,16 @@ var Pond;
             Pond.crc.fillStyle = this.color;
             Pond.crc.beginPath();
             if (this.type === "sleepingBird") {
-                Pond.crc.moveTo(0, -8);
-                Pond.crc.bezierCurveTo(0, 15, -40, 15, -40, 0);
-                Pond.crc.bezierCurveTo(-40, 0, -10, -14, -2, 0);
+                Pond.crc.moveTo(0, 0);
+                Pond.crc.bezierCurveTo(0, 15, -40, 15, -40, -4);
+                Pond.crc.bezierCurveTo(-40, 0, -10, -14, 0, 0);
+                Pond.crc.closePath();
+                Pond.crc.fill();
+            }
+            else if (this.type === "eatingBird") {
+                Pond.crc.moveTo(15, 0);
+                Pond.crc.bezierCurveTo(15, 0, 15, -25, -5, -25);
+                Pond.crc.bezierCurveTo(0, -25, -10, 0, -5, 0);
                 Pond.crc.closePath();
                 Pond.crc.fill();
             }
@@ -85,6 +92,8 @@ var Pond;
         move() {
             let offset = 700;
             if (this.type === "sleepingBird")
+                return;
+            if (this.type === "eatingBird")
                 return;
             if (this.type === "swimmingBird")
                 offset = 500;

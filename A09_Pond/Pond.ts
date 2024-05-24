@@ -211,7 +211,9 @@ namespace Pond {
     birds.push(new Bird({ x: 550, y: 300 }, 0.5, "swimmingBird", "#e6d067", true));
     birds.push(new Bird({ x: 400, y: 350 }, 1, "swimmingBird", "#ffffff", false));
     birds.push(new Bird({ x: 320, y: 250 }, 1, "walkingBird", "#ffffff", true));
-    birds.push(new Bird({ x: 120, y: 450 }, 1, "sleepingBird", "#ffffff", true));
+    birds.push(new Bird({ x: 120, y: 435 }, 1, "sleepingBird", "#ffffff", true));
+    birds.push(new Bird({ x: 230, y: 420 }, 1, "eatingBird", "#ffffff", true));
+
   }
 
   function drawPetals() {
