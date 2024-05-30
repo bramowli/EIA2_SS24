@@ -1,11 +1,10 @@
 namespace Pond {
   export type petalColor = "lighter" | "darker";
-  export class Petal {
-    position: Vector;
-    color: string;
+  export class Petal extends Moveable {
     startPosition: Vector;
 
     constructor(_position: Vector, _color: petalColor) {
+      super(_position, _color);
       this.position = { x: _position.x, y: _position.y };
       this.startPosition = { x: _position.x, y: _position.y };
       this.color = _color;
@@ -30,9 +29,9 @@ namespace Pond {
       crc.restore();
     }
 
-    fall() {
-      this.position.x += 2+ Math.random()*5;
-      this.position.y += 2 + Math.random()*5;
+    move() {
+      this.position.x += 2 + Math.random() * 5;
+      this.position.y += 2 + Math.random() * 5;
 
       if (this.position.y >= canvas.height) {
         this.position = { x: this.startPosition.x, y: this.startPosition.y };

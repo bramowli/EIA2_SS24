@@ -5,16 +5,11 @@ namespace Pond {
   }
   type ReedTypes = "noLeaf" | "oneLeaf" | "twoLeaves";
 
-  export class Reed {
-    position: Vector;
-    size: number;
-    mirror: boolean;
+  export class Reed extends Static{
     type: ReedTypes;
 
     constructor(_position: Vector, _size: number, _mirror: boolean, _type: ReedTypes) {
-      this.position = _position;
-      this.size = _size;
-      this.mirror = _mirror;
+      super(_position, _size, _mirror);
       this.type = _type;
     }
 

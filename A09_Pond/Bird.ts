@@ -1,14 +1,13 @@
 namespace Pond {
   type birdTypes = "swimmingBird" | "walkingBird" | "kniveBird" | "sleepingBird" | "eatingBird";
-  export class Bird {
-    position: Vector;
+  export class Bird extends Moveable {
     size: number;
     type: birdTypes;
-    color: string;
     mirror: boolean;
     underWater: number;
 
     constructor(_position: Vector, _size: number, _type: birdTypes, _color: string, _mirror: boolean) {
+      super(_position, _color);
       this.position = _position;
       this.size = _size;
       this.type = _type;

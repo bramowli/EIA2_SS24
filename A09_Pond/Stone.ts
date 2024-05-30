@@ -1,14 +1,11 @@
 namespace Pond {
   type stoneTypes = "bigStone" | "smallStone" | "weirdStone";
 
-  export class Stone {
-    position: Vector; 
-    size: number;
+  export class Stone extends Static {
     type: stoneTypes;
 
-    constructor(_position: Vector, _size: number, _type: stoneTypes) {
-      this.position = _position;
-      this.size = _size;
+    constructor(_position: Vector, _size: number, _type: stoneTypes, _mirror: boolean) {
+      super(_position, _size, _mirror);
       this.type = _type;
     }
 

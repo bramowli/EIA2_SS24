@@ -1,13 +1,7 @@
 namespace Pond {
-  export class LilyPad {
-    position: Vector;
-    size: number;
-    mirror: boolean;
-
+  export class LilyPad extends Static {
     constructor(_position: Vector, _size: number, _mirror: boolean) {
-      this.position = _position;
-      this.size = _size;
-      this.mirror = _mirror;
+      super(_position, _size, _mirror);
     }
 
     draw() {
@@ -16,15 +10,15 @@ namespace Pond {
       crc.fillStyle = "#273b20";
       crc.strokeStyle = "#1f2e19";
       crc.lineWidth = 3;
-      crc.scale(this.size, this.size)
+      crc.scale(this.size, this.size);
 
       if (this.mirror === true) {
         crc.beginPath();
-        crc.moveTo(0,0)
+        crc.moveTo(0, 0);
         crc.ellipse(0, 0, 30, 15, Math.PI * 2, 0, Math.PI * 1.7);
       } else if (this.mirror === false) {
         crc.beginPath();
-        crc.moveTo(0,0)
+        crc.moveTo(0, 0);
         crc.ellipse(0, 0, 30, 15, Math.PI * 1, 0, Math.PI * 1.7);
       }
 

@@ -7,8 +7,8 @@ namespace Pond {
   window.addEventListener("load", handleLoad);
   export const canvas: HTMLCanvasElement | null = document.querySelector("canvas");
   export const crc: CanvasRenderingContext2D = canvas.getContext("2d");
-  let petals: Petal[] = [];
-  let birds: Bird[] = [];
+  let moveables: Moveable[] = [];
+
   let background: ImageData;
 
   crc.fillStyle = "#c0f2fa";
@@ -176,16 +176,16 @@ namespace Pond {
   }
 
   function drawStones() {
-    new Stone({ x: 300, y: 300 }, 1, "bigStone").draw();
-    new Stone({ x: -20, y: 370 }, 1, "weirdStone").draw();
-    new Stone({ x: 10, y: 400 }, 1, "smallStone").draw();
-    new Stone({ x: 200, y: 280 }, 1, "weirdStone").draw();
-    new Stone({ x: 210, y: 310 }, 1, "smallStone").draw();
-    new Stone({ x: 725, y: 300 }, 1, "smallStone").draw();
-    new Stone({ x: 770, y: 330 }, 1, "bigStone").draw();
-    new Stone({ x: 710, y: 310 }, 1, "weirdStone").draw();
-    new Stone({ x: 220, y: 435 }, 1, "smallStone").draw();
-    new Stone({ x: 210, y: 420 }, 1, "weirdStone").draw();
+    new Stone({ x: 300, y: 300 }, 1, "bigStone", true).draw();
+    new Stone({ x: -20, y: 370 }, 1, "weirdStone", true).draw();
+    new Stone({ x: 10, y: 400 }, 1, "smallStone", true).draw();
+    new Stone({ x: 200, y: 280 }, 1, "weirdStone", true).draw();
+    new Stone({ x: 210, y: 310 }, 1, "smallStone", true).draw();
+    new Stone({ x: 725, y: 300 }, 1, "smallStone", true).draw();
+    new Stone({ x: 770, y: 330 }, 1, "bigStone", true).draw();
+    new Stone({ x: 710, y: 310 }, 1, "weirdStone", true).draw();
+    new Stone({ x: 220, y: 435 }, 1, "smallStone", true).draw();
+    new Stone({ x: 210, y: 420 }, 1, "weirdStone", true).draw();
   }
 
   function drawLilyPads() {
@@ -207,18 +207,18 @@ namespace Pond {
   }
 
   function drawBirds() {
-    birds.push(new Bird({ x: 200, y: 230 }, 0.75, "walkingBird", "#996633", false));
-    birds.push(new Bird({ x: 240, y: 240 }, 0.75, "walkingBird", "#666633", false));
-    birds.push(new Bird({ x: 600, y: 440 }, 0.75, "swimmingBird", "#996633", true));
-    birds.push(new Bird({ x: 240, y: 400 }, 0.75, "swimmingBird", "#666633", false));
-    birds.push(new Bird({ x: 400, y: 300 }, 1, "swimmingBird", "#ffffff", true));
-    birds.push(new Bird({ x: 450, y: 300 }, 0.5, "swimmingBird", "#e6d067", true));
-    birds.push(new Bird({ x: 500, y: 300 }, 0.5, "swimmingBird", "#e6d067", true));
-    birds.push(new Bird({ x: 550, y: 300 }, 0.5, "swimmingBird", "#e6d067", true));
-    birds.push(new Bird({ x: 400, y: 350 }, 1, "swimmingBird", "#ffffff", false));
-    birds.push(new Bird({ x: 320, y: 250 }, 1, "walkingBird", "#ffffff", true));
-    birds.push(new Bird({ x: 120, y: 435 }, 1, "sleepingBird", "#ffffff", true));
-    birds.push(new Bird({ x: 220, y: 420 }, 1, "eatingBird", "#ffffff", false));
+    moveables.push(new Bird({ x: 200, y: 230 }, 0.75, "walkingBird", "#996633", false));
+    moveables.push(new Bird({ x: 240, y: 240 }, 0.75, "walkingBird", "#666633", false));
+    moveables.push(new Bird({ x: 600, y: 440 }, 0.75, "swimmingBird", "#996633", true));
+    moveables.push(new Bird({ x: 240, y: 400 }, 0.75, "swimmingBird", "#666633", false));
+    moveables.push(new Bird({ x: 400, y: 300 }, 1, "swimmingBird", "#ffffff", true));
+    moveables.push(new Bird({ x: 450, y: 300 }, 0.5, "swimmingBird", "#e6d067", true));
+    moveables.push(new Bird({ x: 500, y: 300 }, 0.5, "swimmingBird", "#e6d067", true));
+    moveables.push(new Bird({ x: 550, y: 300 }, 0.5, "swimmingBird", "#e6d067", true));
+    moveables.push(new Bird({ x: 400, y: 350 }, 1, "swimmingBird", "#ffffff", false));
+    moveables.push(new Bird({ x: 320, y: 250 }, 1, "walkingBird", "#ffffff", true));
+    moveables.push(new Bird({ x: 120, y: 435 }, 1, "sleepingBird", "#ffffff", true));
+    moveables.push(new Bird({ x: 220, y: 420 }, 1, "eatingBird", "#ffffff", false));
   }
 
   function drawPetals() {
@@ -231,20 +231,16 @@ namespace Pond {
       } else if (math > 0.5) {
         color = "darker";
       }
-      petals.push(new Petal({ x: Math.random() * 200, y: Math.random() * 250 }, color));
+      moveables.push(new Petal({ x: Math.random() * 200, y: Math.random() * 250 }, color));
       //console.log(petals[i]);
     }
   }
 
   function animate() {
     crc.putImageData(background, 0, 0);
-    for (let j: number = 0; j < birds.length; j++) {
-      birds[j].move();
-      birds[j].draw();
-    }
-    for (let i: number = 0; i < petals.length; i++) {
-      petals[i].fall();
-      petals[i].draw();
+    for (let i: number = 0; i < moveables.length; i++) {
+      moveables[i].move();
+      moveables[i].draw();
     }
     drawReeds();
   }
