@@ -7,6 +7,7 @@ namespace Pond {
   window.addEventListener("load", handleLoad);
   export const canvas: HTMLCanvasElement | null = document.querySelector("canvas");
   export const crc: CanvasRenderingContext2D = canvas.getContext("2d");
+  canvas.addEventListener("click", handleClick);
   let moveables: Moveable[] = [];
 
   let background: ImageData;
@@ -29,6 +30,13 @@ namespace Pond {
     drawPetals();
 
     setInterval(animate, 40);
+  }
+
+  function handleClick(_event: MouseEvent) {
+    let hit: Vector = { x: _event.offsetX, y: _event.offsetY };
+    for (let moveable of moveables) {
+      moveable.interact(hit);
+    }
   }
 
   function drawHills(_position: Vector, _min: number, _max: number, color: string): void {

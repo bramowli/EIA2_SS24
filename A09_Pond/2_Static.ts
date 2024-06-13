@@ -1,5 +1,5 @@
 namespace Pond {
-  export class Static extends Drawable {
+  export abstract class Static extends Drawable {
     size: number;
     mirror: boolean;
 

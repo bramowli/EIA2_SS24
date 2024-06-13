@@ -1,5 +1,5 @@
 namespace Pond {
-  export class Drawable {
+  export abstract class Drawable {
     position: Vector;
 
     constructor(_position: Vector) {
@@ -9,5 +9,9 @@ namespace Pond {
     draw(): void{
         // executes draw of subclasses
     };
+
+    interact(_hitPosition: Vector): void{
+      //executes interaction
+    }
   }
 }

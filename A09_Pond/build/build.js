@@ -10,6 +10,9 @@ var Pond;
             // executes draw of subclasses
         }
         ;
+        interact(_hitPosition) {
+            //executes interaction
+        }
     }
     Pond.Drawable = Drawable;
 })(Pond || (Pond = {}));
@@ -97,6 +100,7 @@ var Pond;
                     this.drawLeg();
                 }
             }
+            //this.hitbox();
             Pond.crc.restore();
         }
         drawBeak() {
@@ -131,6 +135,51 @@ var Pond;
             Pond.crc.closePath();
             Pond.crc.fill();
         }
+        hitbox() {
+            // if (this.type === "swimmingBird") {
+            //   crc.beginPath();
+            //   crc.moveTo(2, 0);
+            //   crc.lineTo(2, -7);
+            //   crc.moveTo(2, -7);
+            //   crc.lineTo(-33, -7);
+            //   crc.moveTo(-33, -7);
+            //   crc.lineTo(-33, -18);
+            //   crc.moveTo(-33, -18);
+            //   crc.lineTo(-57, -18);
+            //   crc.moveTo(-57, -18);
+            //   crc.lineTo(-57, -8);
+            //   crc.moveTo(-57, -8);
+            //   crc.lineTo(-40, -8);
+            //   crc.moveTo(-40, -8);
+            //   crc.lineTo(-40, 12);
+            //   crc.moveTo(-40, 12);
+            //   crc.lineTo(2, 12);
+            //   crc.moveTo(2, 12);
+            //   crc.lineTo(2, 0);
+            //   crc.closePath();
+            //   crc.stroke();
+            // } else if (this.type === "walkingBird") {
+            //   crc.beginPath();
+            //   crc.moveTo(12, 0);
+            //   crc.lineTo(12, -16);
+            //   crc.moveTo(12, -16);
+            //   crc.lineTo(-23, -12);
+            //   crc.moveTo(-23, -12);
+            //   crc.lineTo(-23, -28);
+            //   crc.moveTo(-23, -28);
+            //   crc.lineTo(-47, -28);
+            //   crc.moveTo(-47, -28);
+            //   crc.lineTo(-47, -16);
+            //   crc.moveTo(-47, -16);
+            //   crc.lineTo(-30, -16);
+            //   crc.moveTo(-30, -16);
+            //   crc.lineTo(-30, 2);
+            //   crc.moveTo(-30, 2);
+            //   crc.lineTo
+            //   crc.closePath()
+            //   crc.stroke()
+            //}
+        }
         move() {
             let offset = 700;
             if (this.type === "sleepingBird")
@@ -164,7 +213,26 @@ var Pond;
                 }
             }
         }
-        change() { }
+        interact(_hitPosition) {
+            if (this.type != "swimmingBird" && this.type != "walkingBird")
+                return;
+            if (_hitPosition.x >= this.position.x - 57 &&
+                _hitPosition.x <= this.position.x &&
+                _hitPosition.y >= this.position.y - 18 &&
+                _hitPosition.y <= this.position.y + 12) {
+                this.drawInteraction;
+                console.log("geht");
+            }
+        }
+        drawInteraction() {
+            Pond.crc.fillStyle = "#a86f32";
+            Pond.crc.beginPath();
+            Pond.crc.moveTo(-50, -12);
+            Pond.crc.bezierCurveTo(-50, -10, -57, -10, -57, -11);
+            Pond.crc.lineTo(0, 0);
+            Pond.crc.closePath();
+            Pond.crc.fill();
+        }
     }
     Pond.Bird = Bird;
 })(Pond || (Pond = {}));
@@ -241,6 +309,7 @@ var Pond;
     window.addEventListener("load", handleLoad);
     Pond.canvas = document.querySelector("canvas");
     Pond.crc = Pond.canvas.getContext("2d");
+    Pond.canvas.addEventListener("click", handleClick);
     let moveables = [];
     let background;
     Pond.crc.fillStyle = "#c0f2fa";
@@ -258,6 +327,12 @@ var Pond;
         drawBirds();
         drawPetals();
         setInterval(animate, 40);
+    }
+    function handleClick(_event) {
+        let hit = { x: _event.offsetX, y: _event.offsetY };
+        for (let moveable of moveables) {
+            moveable.interact(hit);
+        }
     }
     function drawHills(_position, _min, _max, color) {
         let stepMin = 115;

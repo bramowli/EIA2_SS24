@@ -1,5 +1,5 @@
 namespace Pond {
-  export class Moveable extends Drawable {
+  export abstract class Moveable extends Drawable {
     color: string;
 
     constructor(_position: Vector, _color: string) {

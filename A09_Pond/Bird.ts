@@ -57,6 +57,7 @@ namespace Pond {
           this.drawLeg();
         }
       }
+      //this.hitbox();
 
       crc.restore();
     }
@@ -103,6 +104,52 @@ namespace Pond {
       crc.fill();
     }
 
+    hitbox() {
+      // if (this.type === "swimmingBird") {
+      //   crc.beginPath();
+      //   crc.moveTo(2, 0);
+      //   crc.lineTo(2, -7);
+      //   crc.moveTo(2, -7);
+      //   crc.lineTo(-33, -7);
+      //   crc.moveTo(-33, -7);
+      //   crc.lineTo(-33, -18);
+      //   crc.moveTo(-33, -18);
+      //   crc.lineTo(-57, -18);
+      //   crc.moveTo(-57, -18);
+      //   crc.lineTo(-57, -8);
+      //   crc.moveTo(-57, -8);
+      //   crc.lineTo(-40, -8);
+      //   crc.moveTo(-40, -8);
+      //   crc.lineTo(-40, 12);
+      //   crc.moveTo(-40, 12);
+      //   crc.lineTo(2, 12);
+      //   crc.moveTo(2, 12);
+      //   crc.lineTo(2, 0);
+      //   crc.closePath();
+      //   crc.stroke();
+      // } else if (this.type === "walkingBird") {
+      //   crc.beginPath();
+      //   crc.moveTo(12, 0);
+      //   crc.lineTo(12, -16);
+      //   crc.moveTo(12, -16);
+      //   crc.lineTo(-23, -12);
+      //   crc.moveTo(-23, -12);
+      //   crc.lineTo(-23, -28);
+      //   crc.moveTo(-23, -28);
+      //   crc.lineTo(-47, -28);
+      //   crc.moveTo(-47, -28);
+      //   crc.lineTo(-47, -16);
+      //   crc.moveTo(-47, -16);
+      //   crc.lineTo(-30, -16);
+      //   crc.moveTo(-30, -16);
+      //   crc.lineTo(-30, 2);
+      //   crc.moveTo(-30, 2);
+      //   crc.lineTo
+      //   crc.closePath()
+      //   crc.stroke()
+      //}
+    }
+
     move() {
       let offset = 700;
 
@@ -136,6 +183,29 @@ namespace Pond {
       }
     }
 
-    change() {}
+    interact(_hitPosition: Vector) {
+      if (this.type != "swimmingBird" && this.type != "walkingBird") return;
+
+      if (
+        _hitPosition.x >= this.position.x - 57 &&
+        _hitPosition.x <= this.position.x &&
+        _hitPosition.y >= this.position.y - 18 &&
+        _hitPosition.y <= this.position.y + 12
+      ) {
+        this.drawInteraction
+        console.log("geht");
+      }
+    }
+
+    drawInteraction(){
+      crc.fillStyle = "#a86f32";
+        crc.beginPath();
+        crc.moveTo(-50, -12);
+        crc.bezierCurveTo(-50,-10, -57,-10, -57,-11)
+        crc.lineTo(0,0)
+
+        crc.closePath();
+        crc.fill();
+    }
   }
 }
