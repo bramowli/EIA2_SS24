@@ -8,6 +8,9 @@ namespace Pond {
   export const canvas: HTMLCanvasElement | null = document.querySelector("canvas");
   export const crc: CanvasRenderingContext2D = canvas.getContext("2d");
   canvas.addEventListener("click", handleClick);
+  const btnNewBird: HTMLButtonElement = document.querySelector("#btnNewBird");
+  btnNewBird.addEventListener("click", addRandomBird);
+
   let moveables: Moveable[] = [];
   let lilyPads: LilyPad[] = [];
 
@@ -204,7 +207,6 @@ namespace Pond {
     lilyPads.push(new LilyPad({ x: 600, y: 400 }, 1, true));
     lilyPads.push(new LilyPad({ x: 630, y: 300 }, 1, false));
     lilyPads.push(new LilyPad({ x: 680, y: 420 }, 1, false));
-    
   }
 
   function drawReeds() {
@@ -232,6 +234,15 @@ namespace Pond {
     moveables.push(new Bird({ x: 320, y: 250 }, 1, "walkingBird", "#ffffff", true));
     moveables.push(new Bird({ x: 120, y: 435 }, 1, "sleepingBird", "#ffffff", true));
     moveables.push(new Bird({ x: 220, y: 420 }, 1, "eatingBird", "#ffffff", false));
+  }
+
+  function addRandomBird() {
+    const x = 300 + 300 * Math.random();
+    const y = 220 + 40 * Math.random();
+    const size = Math.random() * 0.5 + 0.5;
+    const color = Math.random() < 0.5 ? "#ffffff" : "#996633";
+    const direction = Math.random() < 0.5;
+    moveables.push(new Bird({ x, y }, size, "walkingBird", color, direction));
   }
 
   function drawPetals() {

@@ -312,6 +312,8 @@ var Pond;
     Pond.canvas = document.querySelector("canvas");
     Pond.crc = Pond.canvas.getContext("2d");
     Pond.canvas.addEventListener("click", handleClick);
+    const btnNewBird = document.querySelector("#btnNewBird");
+    btnNewBird.addEventListener("click", addRandomBird);
     let moveables = [];
     let lilyPads = [];
     let background;
@@ -494,6 +496,14 @@ var Pond;
         moveables.push(new Pond.Bird({ x: 320, y: 250 }, 1, "walkingBird", "#ffffff", true));
         moveables.push(new Pond.Bird({ x: 120, y: 435 }, 1, "sleepingBird", "#ffffff", true));
         moveables.push(new Pond.Bird({ x: 220, y: 420 }, 1, "eatingBird", "#ffffff", false));
+    }
+    function addRandomBird() {
+        const x = 300 + 300 * Math.random();
+        const y = 220 + 40 * Math.random();
+        const size = Math.random() * 0.5 + 0.5;
+        const color = Math.random() < 0.5 ? "#ffffff" : "#996633";
+        const direction = Math.random() < 0.5;
+        moveables.push(new Pond.Bird({ x, y }, size, "walkingBird", color, direction));
     }
     function drawPetals() {
         // for having multiple petals
