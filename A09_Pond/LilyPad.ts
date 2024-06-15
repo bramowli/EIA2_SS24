@@ -1,5 +1,7 @@
 namespace Pond {
   export class LilyPad extends Static {
+    doesItSplash: boolean = false;
+
     constructor(_position: Vector, _size: number, _mirror: boolean) {
       super(_position, _size, _mirror);
     }
@@ -26,7 +28,37 @@ namespace Pond {
       crc.stroke();
       crc.fill();
 
+      if (this.doesItSplash === true) this.drawInteraction();
+
       crc.restore();
+    }
+
+    interact(_hitPosition: Vector) {
+      if (
+        _hitPosition.x >= this.position.x - 30 &&
+        _hitPosition.x <= this.position.x &&
+        _hitPosition.y >= this.position.y - 15 &&
+        _hitPosition.y <= this.position.y
+      ) {
+        this.doesItSplash = !this.doesItSplash;
+        new Audio("assets/Platsch.wav").play();
+        console.log("platsch");
+      }
+    }
+
+    drawInteraction() {
+      crc.strokeStyle = "#374161";
+      crc.beginPath();
+
+      crc.lineTo(-25, 20);
+      crc.bezierCurveTo(-13,30, 15,30, 30,20)
+
+      crc.moveTo(-25,-20)
+      crc.bezierCurveTo(-13,-30, 15,-30, 30,-20)
+
+      crc.stroke();
+      console.log("fdg")
+      
     }
   }
 }

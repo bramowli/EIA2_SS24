@@ -5,6 +5,7 @@ namespace Pond {
     type: birdTypes;
     mirror: boolean;
     underWater: number;
+    isBeakOpen: boolean = false;
 
     constructor(_position: Vector, _size: number, _type: birdTypes, _color: string, _mirror: boolean) {
       super(_position, _color);
@@ -56,6 +57,7 @@ namespace Pond {
         if (this.type === "walkingBird") {
           this.drawLeg();
         }
+        if (this.isBeakOpen) this.drawInteraction();
       }
       //this.hitbox();
 
@@ -192,20 +194,57 @@ namespace Pond {
         _hitPosition.y >= this.position.y - 18 &&
         _hitPosition.y <= this.position.y + 12
       ) {
-        this.drawInteraction
+        this.isBeakOpen = !this.isBeakOpen;
+        new Audio("assets/Quack.wav").play()
         console.log("geht");
       }
     }
 
-    drawInteraction(){
+    drawInteraction() {
       crc.fillStyle = "#a86f32";
+      if (this.type === "swimmingBird") {
         crc.beginPath();
-        crc.moveTo(-50, -12);
-        crc.bezierCurveTo(-50,-10, -57,-10, -57,-11)
-        crc.lineTo(0,0)
+        crc.moveTo(-50, -10);
+        crc.bezierCurveTo(-48, -9, -55, -7, -55, -7);
+        crc.lineTo(-50, -15);
 
+        crc.moveTo(0, 0);
         crc.closePath();
         crc.fill();
+
+        crc.beginPath();
+        crc.moveTo(-60,-14);
+        crc.lineTo(-67,-16)
+        crc.moveTo(-60,-12)
+        crc.lineTo(-67,-12)
+        crc.moveTo(-60,-10)
+        crc.lineTo(-67,-8)
+
+        crc.moveTo(0,0)
+        crc.closePath()
+        crc.stroke()
+      } else if (this.type === "walkingBird") {
+        crc.beginPath();
+        crc.moveTo(-37, -23);
+        crc.bezierCurveTo(-35, -17, -45, -15, -45, -15);
+        crc.lineTo(-37, -23);
+
+        crc.moveTo(0, 0);
+        crc.closePath();
+        crc.fill();
+        
+        crc.beginPath();
+        crc.moveTo(-54,-21);
+        crc.lineTo(-61,-23)
+        crc.moveTo(-54,-19)
+        crc.lineTo(-61,-19)
+        crc.moveTo(-54,-17)
+        crc.lineTo(-61,-15)
+
+        crc.moveTo(0,0)
+        crc.closePath()
+        crc.stroke()
+      }
     }
   }
 }

@@ -9,6 +9,7 @@ namespace Pond {
   export const crc: CanvasRenderingContext2D = canvas.getContext("2d");
   canvas.addEventListener("click", handleClick);
   let moveables: Moveable[] = [];
+  let lilyPads: LilyPad[] = [];
 
   let background: ImageData;
 
@@ -36,6 +37,9 @@ namespace Pond {
     let hit: Vector = { x: _event.offsetX, y: _event.offsetY };
     for (let moveable of moveables) {
       moveable.interact(hit);
+    }
+    for (let lilyPad of lilyPads) {
+      lilyPad.interact(hit);
     }
   }
 
@@ -197,9 +201,10 @@ namespace Pond {
   }
 
   function drawLilyPads() {
-    new LilyPad({ x: 600, y: 400 }, 1, true).draw();
-    new LilyPad({ x: 630, y: 300 }, 1, false).draw();
-    new LilyPad({ x: 680, y: 420 }, 1, false).draw();
+    lilyPads.push(new LilyPad({ x: 600, y: 400 }, 1, true));
+    lilyPads.push(new LilyPad({ x: 630, y: 300 }, 1, false));
+    lilyPads.push(new LilyPad({ x: 680, y: 420 }, 1, false));
+    
   }
 
   function drawReeds() {
@@ -246,6 +251,9 @@ namespace Pond {
 
   function animate() {
     crc.putImageData(background, 0, 0);
+    for (let lilyPad of lilyPads) {
+      lilyPad.draw();
+    }
     for (let i: number = 0; i < moveables.length; i++) {
       moveables[i].move();
       moveables[i].draw();

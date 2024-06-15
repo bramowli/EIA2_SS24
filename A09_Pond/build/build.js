@@ -50,6 +50,7 @@ var Pond;
         type;
         mirror;
         underWater;
+        isBeakOpen = false;
         constructor(_position, _size, _type, _color, _mirror) {
             super(_position, _color);
             this.position = _position;
@@ -99,6 +100,8 @@ var Pond;
                 if (this.type === "walkingBird") {
                     this.drawLeg();
                 }
+                if (this.isBeakOpen)
+                    this.drawInteraction();
             }
             //this.hitbox();
             Pond.crc.restore();
@@ -220,18 +223,51 @@ var Pond;
                 _hitPosition.x <= this.position.x &&
                 _hitPosition.y >= this.position.y - 18 &&
                 _hitPosition.y <= this.position.y + 12) {
-                this.drawInteraction;
+                this.isBeakOpen = !this.isBeakOpen;
+                new Audio("assets/Quack.wav").play();
                 console.log("geht");
             }
         }
         drawInteraction() {
             Pond.crc.fillStyle = "#a86f32";
-            Pond.crc.beginPath();
-            Pond.crc.moveTo(-50, -12);
-            Pond.crc.bezierCurveTo(-50, -10, -57, -10, -57, -11);
-            Pond.crc.lineTo(0, 0);
-            Pond.crc.closePath();
-            Pond.crc.fill();
+            if (this.type === "swimmingBird") {
+                Pond.crc.beginPath();
+                Pond.crc.moveTo(-50, -10);
+                Pond.crc.bezierCurveTo(-48, -9, -55, -7, -55, -7);
+                Pond.crc.lineTo(-50, -15);
+                Pond.crc.moveTo(0, 0);
+                Pond.crc.closePath();
+                Pond.crc.fill();
+                Pond.crc.beginPath();
+                Pond.crc.moveTo(-60, -14);
+                Pond.crc.lineTo(-67, -16);
+                Pond.crc.moveTo(-60, -12);
+                Pond.crc.lineTo(-67, -12);
+                Pond.crc.moveTo(-60, -10);
+                Pond.crc.lineTo(-67, -8);
+                Pond.crc.moveTo(0, 0);
+                Pond.crc.closePath();
+                Pond.crc.stroke();
+            }
+            else if (this.type === "walkingBird") {
+                Pond.crc.beginPath();
+                Pond.crc.moveTo(-37, -23);
+                Pond.crc.bezierCurveTo(-35, -17, -45, -15, -45, -15);
+                Pond.crc.lineTo(-37, -23);
+                Pond.crc.moveTo(0, 0);
+                Pond.crc.closePath();
+                Pond.crc.fill();
+                Pond.crc.beginPath();
+                Pond.crc.moveTo(-54, -21);
+                Pond.crc.lineTo(-61, -23);
+                Pond.crc.moveTo(-54, -19);
+                Pond.crc.lineTo(-61, -19);
+                Pond.crc.moveTo(-54, -17);
+                Pond.crc.lineTo(-61, -15);
+                Pond.crc.moveTo(0, 0);
+                Pond.crc.closePath();
+                Pond.crc.stroke();
+            }
         }
     }
     Pond.Bird = Bird;
@@ -239,6 +275,7 @@ var Pond;
 var Pond;
 (function (Pond) {
     class LilyPad extends Pond.Static {
+        doesItSplash = false;
         constructor(_position, _size, _mirror) {
             super(_position, _size, _mirror);
         }
@@ -262,7 +299,29 @@ var Pond;
             Pond.crc.closePath();
             Pond.crc.stroke();
             Pond.crc.fill();
+            if (this.doesItSplash === true)
+                this.drawInteraction();
             Pond.crc.restore();
+        }
+        interact(_hitPosition) {
+            if (_hitPosition.x >= this.position.x - 30 &&
+                _hitPosition.x <= this.position.x &&
+                _hitPosition.y >= this.position.y - 15 &&
+                _hitPosition.y <= this.position.y) {
+                this.doesItSplash = !this.doesItSplash;
+                new Audio("assets/Platsch.wav").play();
+                console.log("platsch");
+            }
+        }
+        drawInteraction() {
+            Pond.crc.strokeStyle = "#374161";
+            Pond.crc.beginPath();
+            Pond.crc.lineTo(-25, 20);
+            Pond.crc.bezierCurveTo(-13, 30, 15, 30, 30, 20);
+            Pond.crc.moveTo(-25, -20);
+            Pond.crc.bezierCurveTo(-13, -30, 15, -30, 30, -20);
+            Pond.crc.stroke();
+            console.log("fdg");
         }
     }
     Pond.LilyPad = LilyPad;
@@ -311,6 +370,7 @@ var Pond;
     Pond.crc = Pond.canvas.getContext("2d");
     Pond.canvas.addEventListener("click", handleClick);
     let moveables = [];
+    let lilyPads = [];
     let background;
     Pond.crc.fillStyle = "#c0f2fa";
     Pond.crc.fillRect(0, 0, Pond.crc.canvas.width, Pond.crc.canvas.height);
@@ -332,6 +392,9 @@ var Pond;
         let hit = { x: _event.offsetX, y: _event.offsetY };
         for (let moveable of moveables) {
             moveable.interact(hit);
+        }
+        for (let lilyPad of lilyPads) {
+            lilyPad.interact(hit);
         }
     }
     function drawHills(_position, _min, _max, color) {
@@ -460,9 +523,9 @@ var Pond;
         new Pond.Stone({ x: 210, y: 420 }, 1, "weirdStone", true).draw();
     }
     function drawLilyPads() {
-        new Pond.LilyPad({ x: 600, y: 400 }, 1, true).draw();
-        new Pond.LilyPad({ x: 630, y: 300 }, 1, false).draw();
-        new Pond.LilyPad({ x: 680, y: 420 }, 1, false).draw();
+        lilyPads.push(new Pond.LilyPad({ x: 600, y: 400 }, 1, true));
+        lilyPads.push(new Pond.LilyPad({ x: 630, y: 300 }, 1, false));
+        lilyPads.push(new Pond.LilyPad({ x: 680, y: 420 }, 1, false));
     }
     function drawReeds() {
         new Pond.Reed({ x: 550, y: 270 }, 1, true, "twoLeaves").draw();
@@ -506,6 +569,9 @@ var Pond;
     }
     function animate() {
         Pond.crc.putImageData(background, 0, 0);
+        for (let lilyPad of lilyPads) {
+            lilyPad.draw();
+        }
         for (let i = 0; i < moveables.length; i++) {
             moveables[i].move();
             moveables[i].draw();
