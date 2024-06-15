@@ -1,16 +1,16 @@
 namespace Pond {
   export type petalColor = "lighter" | "darker";
   export class Petal extends Moveable {
-    startPosition: Vector;
+    private startPosition: Vector;
 
     constructor(_position: Vector, _color: petalColor) {
-      super(_position, _color);
+      super(_position, 1, false, _color);
       this.position = { x: _position.x, y: _position.y };
       this.startPosition = { x: _position.x, y: _position.y };
       this.color = _color;
     }
 
-    draw() {
+    public draw() {
       crc.save();
       crc.translate(this.position.x, this.position.y);
 
@@ -29,7 +29,7 @@ namespace Pond {
       crc.restore();
     }
 
-    move() {
+    public move() {
       this.position.x += 2 + Math.random() * 5;
       this.position.y += 2 + Math.random() * 5;
 
@@ -37,5 +37,7 @@ namespace Pond {
         this.position = { x: this.startPosition.x, y: this.startPosition.y };
       }
     }
+
+    public interact(_hitPosition: Vector): void {}
   }
 }

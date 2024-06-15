@@ -1,15 +1,12 @@
 namespace Pond {
   export abstract class Moveable extends Drawable {
-    color: string;
+    protected color: string;
 
-    constructor(_position: Vector, _color: string) {
-      super(_position);
+    constructor(_position: Vector, _size: number, _mirror: boolean, _color: string) {
+      super(_position, _size, _mirror);
 
       this.color = _color;
     }
-
-    move(): void {
-      // executes move from subclasses
-    }
+    public abstract move(): void;
   }
 }

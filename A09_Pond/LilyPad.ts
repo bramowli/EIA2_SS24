@@ -1,14 +1,14 @@
 namespace Pond {
-  export class LilyPad extends Static {
-    SPLASH_DURATION: number = 30;
-    splashing: number;
+  export class LilyPad extends Drawable {
+    private readonly SPLASH_DURATION: number = 30;
+    private splashing: number;
 
     constructor(_position: Vector, _size: number, _mirror: boolean) {
       super(_position, _size, _mirror);
       this.splashing = -1;
     }
 
-    draw() {
+    public draw() {
       crc.save();
       crc.translate(this.position.x, this.position.y);
       crc.fillStyle = "#273b20";
@@ -38,7 +38,7 @@ namespace Pond {
       crc.restore();
     }
 
-    interact(_hitPosition: Vector) {
+    public interact(_hitPosition: Vector) {
       if (
         _hitPosition.x >= this.position.x - 30 &&
         _hitPosition.x <= this.position.x &&
@@ -52,7 +52,7 @@ namespace Pond {
       }
     }
 
-    drawInteraction() {
+    private drawInteraction() {
       crc.strokeStyle = "#374161";
       crc.beginPath();
 

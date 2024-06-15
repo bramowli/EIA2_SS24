@@ -5,15 +5,15 @@ namespace Pond {
   }
   type ReedTypes = "noLeaf" | "oneLeaf" | "twoLeaves";
 
-  export class Reed extends Static{
-    type: ReedTypes;
+  export class Reed extends Drawable {
+    private type: ReedTypes;
 
     constructor(_position: Vector, _size: number, _mirror: boolean, _type: ReedTypes) {
       super(_position, _size, _mirror);
       this.type = _type;
     }
 
-    draw() {
+    public draw() {
       if (this.type === "noLeaf") {
         this.drawStem();
         this.drawCatTail();
@@ -28,7 +28,7 @@ namespace Pond {
         this.drawLeaf2();
       }
     }
-    drawStem() {
+    private drawStem() {
       crc.save();
       crc.translate(this.position.x, this.position.y);
       crc.fillStyle = "#404f27";
@@ -43,7 +43,7 @@ namespace Pond {
       crc.restore();
     }
 
-    drawCatTail() {
+    private drawCatTail() {
       crc.save();
       crc.translate(this.position.x + 45, this.position.y - 128);
       crc.fillStyle = "#401c05";
@@ -55,7 +55,8 @@ namespace Pond {
       crc.fill();
       crc.restore();
     }
-    drawLeaf1() {
+
+    private drawLeaf1() {
       crc.save();
       crc.translate(this.position.x + 8, this.position.y - 50);
       crc.fillStyle = "#404f27";
@@ -70,7 +71,7 @@ namespace Pond {
       crc.restore();
     }
 
-    drawLeaf2() {
+    private drawLeaf2() {
       crc.save();
       crc.translate(this.position.x + 6, this.position.y - 20);
       crc.fillStyle = "#404f27";
@@ -85,6 +86,6 @@ namespace Pond {
       crc.restore();
     }
 
-    goose() {}
+    public interact(_hitPosition: Pond.Vector): void {}
   }
 }

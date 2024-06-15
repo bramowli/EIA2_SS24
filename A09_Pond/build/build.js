@@ -3,15 +3,12 @@ var Pond;
 (function (Pond) {
     class Drawable {
         position;
-        constructor(_position) {
+        size;
+        mirror;
+        constructor(_position, _size, _mirror) {
             this.position = _position;
-        }
-        draw() {
-            // executes draw of subclasses
-        }
-        ;
-        interact(_hitPosition) {
-            //executes interaction
+            this.size = _size;
+            this.mirror = _mirror;
         }
     }
     Pond.Drawable = Drawable;
@@ -20,40 +17,22 @@ var Pond;
 (function (Pond) {
     class Moveable extends Pond.Drawable {
         color;
-        constructor(_position, _color) {
-            super(_position);
+        constructor(_position, _size, _mirror, _color) {
+            super(_position, _size, _mirror);
             this.color = _color;
-        }
-        move() {
-            // executes move from subclasses
         }
     }
     Pond.Moveable = Moveable;
 })(Pond || (Pond = {}));
 var Pond;
 (function (Pond) {
-    class Static extends Pond.Drawable {
-        size;
-        mirror;
-        constructor(_position, _size, _mirror) {
-            super(_position);
-            this.size = _size;
-            this.mirror = _mirror;
-        }
-    }
-    Pond.Static = Static;
-})(Pond || (Pond = {}));
-var Pond;
-(function (Pond) {
     class Bird extends Pond.Moveable {
         BEAK_OPEN_DURATION = 30;
-        size;
         type;
-        mirror;
         underWater;
         beakOpen;
         constructor(_position, _size, _type, _color, _mirror) {
-            super(_position, _color);
+            super(_position, _size, _mirror, _color);
             this.position = _position;
             this.size = _size;
             this.type = _type;
@@ -233,7 +212,7 @@ var Pond;
 })(Pond || (Pond = {}));
 var Pond;
 (function (Pond) {
-    class LilyPad extends Pond.Static {
+    class LilyPad extends Pond.Drawable {
         SPLASH_DURATION = 30;
         splashing;
         constructor(_position, _size, _mirror) {
@@ -294,7 +273,7 @@ var Pond;
     class Petal extends Pond.Moveable {
         startPosition;
         constructor(_position, _color) {
-            super(_position, _color);
+            super(_position, 1, false, _color);
             this.position = { x: _position.x, y: _position.y };
             this.startPosition = { x: _position.x, y: _position.y };
             this.color = _color;
@@ -323,6 +302,7 @@ var Pond;
                 this.position = { x: this.startPosition.x, y: this.startPosition.y };
             }
         }
+        interact(_hitPosition) { }
     }
     Pond.Petal = Petal;
 })(Pond || (Pond = {}));
@@ -544,7 +524,7 @@ var Pond;
 })(Pond || (Pond = {}));
 var Pond;
 (function (Pond) {
-    class Reed extends Pond.Static {
+    class Reed extends Pond.Drawable {
         type;
         constructor(_position, _size, _mirror, _type) {
             super(_position, _size, _mirror);
@@ -615,13 +595,13 @@ var Pond;
             Pond.crc.fill();
             Pond.crc.restore();
         }
-        goose() { }
+        interact(_hitPosition) { }
     }
     Pond.Reed = Reed;
 })(Pond || (Pond = {}));
 var Pond;
 (function (Pond) {
-    class Stone extends Pond.Static {
+    class Stone extends Pond.Drawable {
         type;
         constructor(_position, _size, _type, _mirror) {
             super(_position, _size, _mirror);
@@ -658,6 +638,7 @@ var Pond;
             Pond.crc.fill();
             Pond.crc.restore();
         }
+        interact(_hitPosition) { }
     }
     Pond.Stone = Stone;
 })(Pond || (Pond = {}));

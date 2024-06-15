@@ -1,15 +1,13 @@
 namespace Pond {
   type birdTypes = "swimmingBird" | "walkingBird" | "kniveBird" | "sleepingBird" | "eatingBird";
   export class Bird extends Moveable {
-    BEAK_OPEN_DURATION: number = 30;
-    size: number;
-    type: birdTypes;
-    mirror: boolean;
-    underWater: number;
-    beakOpen: number;
+    private readonly BEAK_OPEN_DURATION: number = 30;
+    private type: birdTypes;
+    private underWater: number;
+    private beakOpen: number;
 
     constructor(_position: Vector, _size: number, _type: birdTypes, _color: string, _mirror: boolean) {
-      super(_position, _color);
+      super(_position, _size, _mirror, _color);
       this.position = _position;
       this.size = _size;
       this.type = _type;
@@ -19,7 +17,7 @@ namespace Pond {
       this.beakOpen = -1;
     }
 
-    draw() {
+    public draw() {
       crc.save();
       crc.translate(this.position.x, this.position.y);
       if (this.mirror == false) {
@@ -68,7 +66,7 @@ namespace Pond {
       crc.restore();
     }
 
-    drawBeak() {
+    private drawBeak() {
       crc.translate(-50, -14);
 
       crc.fillStyle = "#a86f32";
@@ -82,7 +80,7 @@ namespace Pond {
       crc.fill();
     }
 
-    drawEye() {
+    private drawEye() {
       crc.translate(47, 12);
 
       crc.fillStyle = "#000000";
@@ -95,7 +93,7 @@ namespace Pond {
       crc.fill();
     }
 
-    drawLeg() {
+    private drawLeg() {
       crc.translate(-10, 9.5);
       crc.fillStyle = "#a86f32";
       crc.beginPath();
@@ -110,7 +108,7 @@ namespace Pond {
       crc.fill();
     }
 
-    move() {
+    public move() {
       let offset = 700;
 
       if (this.type === "sleepingBird") return;
@@ -143,7 +141,7 @@ namespace Pond {
       }
     }
 
-    interact(_hitPosition: Vector) {
+    public interact(_hitPosition: Vector) {
       if (this.type != "swimmingBird" && this.type != "walkingBird") return;
 
       if (
@@ -159,7 +157,7 @@ namespace Pond {
       }
     }
 
-    drawInteraction() {
+    private drawInteraction() {
       crc.fillStyle = "#a86f32";
       if (this.type === "swimmingBird") {
         crc.beginPath();

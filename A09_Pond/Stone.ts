@@ -1,15 +1,15 @@
 namespace Pond {
   type stoneTypes = "bigStone" | "smallStone" | "weirdStone";
 
-  export class Stone extends Static {
-    type: stoneTypes;
+  export class Stone extends Drawable {
+    private type: stoneTypes;
 
     constructor(_position: Vector, _size: number, _type: stoneTypes, _mirror: boolean) {
       super(_position, _size, _mirror);
       this.type = _type;
     }
 
-    draw() {
+    public draw() {
       crc.save();
       crc.translate(this.position.x, this.position.y);
       crc.fillStyle = "#737373";
@@ -38,5 +38,6 @@ namespace Pond {
       crc.fill();
       crc.restore();
     }
+    public interact(_hitPosition: Vector): void {}
   }
 }
