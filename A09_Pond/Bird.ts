@@ -1,11 +1,12 @@
 namespace Pond {
   type birdTypes = "swimmingBird" | "walkingBird" | "kniveBird" | "sleepingBird" | "eatingBird";
   export class Bird extends Moveable {
+    BEAK_OPEN_DURATION: number = 30;
     size: number;
     type: birdTypes;
     mirror: boolean;
     underWater: number;
-    isBeakOpen: boolean = false;
+    beakOpen: number;
 
     constructor(_position: Vector, _size: number, _type: birdTypes, _color: string, _mirror: boolean) {
       super(_position, _color);
@@ -15,6 +16,7 @@ namespace Pond {
       this.color = _color;
       this.mirror = _mirror;
       this.underWater = -1;
+      this.beakOpen = -1;
     }
 
     draw() {
@@ -57,9 +59,11 @@ namespace Pond {
         if (this.type === "walkingBird") {
           this.drawLeg();
         }
-        if (this.isBeakOpen) this.drawInteraction();
+        if (this.beakOpen > 0) {
+          this.drawInteraction();
+          this.beakOpen--;
+        }
       }
-      //this.hitbox();
 
       crc.restore();
     }
@@ -106,52 +110,6 @@ namespace Pond {
       crc.fill();
     }
 
-    hitbox() {
-      // if (this.type === "swimmingBird") {
-      //   crc.beginPath();
-      //   crc.moveTo(2, 0);
-      //   crc.lineTo(2, -7);
-      //   crc.moveTo(2, -7);
-      //   crc.lineTo(-33, -7);
-      //   crc.moveTo(-33, -7);
-      //   crc.lineTo(-33, -18);
-      //   crc.moveTo(-33, -18);
-      //   crc.lineTo(-57, -18);
-      //   crc.moveTo(-57, -18);
-      //   crc.lineTo(-57, -8);
-      //   crc.moveTo(-57, -8);
-      //   crc.lineTo(-40, -8);
-      //   crc.moveTo(-40, -8);
-      //   crc.lineTo(-40, 12);
-      //   crc.moveTo(-40, 12);
-      //   crc.lineTo(2, 12);
-      //   crc.moveTo(2, 12);
-      //   crc.lineTo(2, 0);
-      //   crc.closePath();
-      //   crc.stroke();
-      // } else if (this.type === "walkingBird") {
-      //   crc.beginPath();
-      //   crc.moveTo(12, 0);
-      //   crc.lineTo(12, -16);
-      //   crc.moveTo(12, -16);
-      //   crc.lineTo(-23, -12);
-      //   crc.moveTo(-23, -12);
-      //   crc.lineTo(-23, -28);
-      //   crc.moveTo(-23, -28);
-      //   crc.lineTo(-47, -28);
-      //   crc.moveTo(-47, -28);
-      //   crc.lineTo(-47, -16);
-      //   crc.moveTo(-47, -16);
-      //   crc.lineTo(-30, -16);
-      //   crc.moveTo(-30, -16);
-      //   crc.lineTo(-30, 2);
-      //   crc.moveTo(-30, 2);
-      //   crc.lineTo
-      //   crc.closePath()
-      //   crc.stroke()
-      //}
-    }
-
     move() {
       let offset = 700;
 
@@ -192,10 +150,11 @@ namespace Pond {
         _hitPosition.x >= this.position.x - 57 &&
         _hitPosition.x <= this.position.x &&
         _hitPosition.y >= this.position.y - 18 &&
-        _hitPosition.y <= this.position.y + 12
+        _hitPosition.y <= this.position.y + 12 &&
+        this.beakOpen <= 0
       ) {
-        this.isBeakOpen = !this.isBeakOpen;
-        new Audio("assets/Quack.wav").play()
+        this.beakOpen = this.BEAK_OPEN_DURATION;
+        new Audio("assets/Quack.wav").play();
         console.log("geht");
       }
     }
@@ -213,16 +172,16 @@ namespace Pond {
         crc.fill();
 
         crc.beginPath();
-        crc.moveTo(-60,-14);
-        crc.lineTo(-67,-16)
-        crc.moveTo(-60,-12)
-        crc.lineTo(-67,-12)
-        crc.moveTo(-60,-10)
-        crc.lineTo(-67,-8)
+        crc.moveTo(-60, -14);
+        crc.lineTo(-67, -16);
+        crc.moveTo(-60, -12);
+        crc.lineTo(-67, -12);
+        crc.moveTo(-60, -10);
+        crc.lineTo(-67, -8);
 
-        crc.moveTo(0,0)
-        crc.closePath()
-        crc.stroke()
+        crc.moveTo(0, 0);
+        crc.closePath();
+        crc.stroke();
       } else if (this.type === "walkingBird") {
         crc.beginPath();
         crc.moveTo(-37, -23);
@@ -232,18 +191,18 @@ namespace Pond {
         crc.moveTo(0, 0);
         crc.closePath();
         crc.fill();
-        
-        crc.beginPath();
-        crc.moveTo(-54,-21);
-        crc.lineTo(-61,-23)
-        crc.moveTo(-54,-19)
-        crc.lineTo(-61,-19)
-        crc.moveTo(-54,-17)
-        crc.lineTo(-61,-15)
 
-        crc.moveTo(0,0)
-        crc.closePath()
-        crc.stroke()
+        crc.beginPath();
+        crc.moveTo(-54, -21);
+        crc.lineTo(-61, -23);
+        crc.moveTo(-54, -19);
+        crc.lineTo(-61, -19);
+        crc.moveTo(-54, -17);
+        crc.lineTo(-61, -15);
+
+        crc.moveTo(0, 0);
+        crc.closePath();
+        crc.stroke();
       }
     }
   }
