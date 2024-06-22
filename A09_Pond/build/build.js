@@ -155,7 +155,7 @@ var Pond;
         }
         interact(_hitPosition) {
             if (this.type != "swimmingBird" && this.type != "walkingBird")
-                return;
+                return false;
             if (_hitPosition.x >= this.position.x - 57 &&
                 _hitPosition.x <= this.position.x &&
                 _hitPosition.y >= this.position.y - 18 &&
@@ -164,7 +164,9 @@ var Pond;
                 this.beakOpen = this.BEAK_OPEN_DURATION;
                 new Audio("assets/Quack.wav").play();
                 console.log("geht");
+                return true;
             }
+            return false;
         }
         drawInteraction() {
             Pond.crc.fillStyle = "#a86f32";
@@ -212,6 +214,38 @@ var Pond;
 })(Pond || (Pond = {}));
 var Pond;
 (function (Pond) {
+    class Food extends Pond.Drawable {
+        constructor(_position, _size, _mirror) {
+            super(_position, _size, _mirror);
+            this.position = _position;
+            this.size = _size;
+            this.mirror = _mirror;
+        }
+        draw() {
+            Pond.crc.save();
+            Pond.crc.translate(this.position.x, this.position.y);
+            if (this.mirror == false) {
+                Pond.crc.scale(-this.size, this.size);
+            }
+            else {
+                Pond.crc.scale(this.size, this.size);
+            }
+            Pond.crc.beginPath();
+            Pond.crc.moveTo(0, 0);
+            Pond.crc.bezierCurveTo(5, -5, 10, 5, 15, 0);
+            Pond.crc.strokeStyle = "#db7472";
+            Pond.crc.lineWidth = 4;
+            Pond.crc.stroke();
+            Pond.crc.restore();
+        }
+        interact(_hitPosition) {
+            return false;
+        }
+    }
+    Pond.Food = Food;
+})(Pond || (Pond = {}));
+var Pond;
+(function (Pond) {
     class LilyPad extends Pond.Drawable {
         SPLASH_DURATION = 30;
         splashing;
@@ -254,7 +288,9 @@ var Pond;
                 this.splashing = this.SPLASH_DURATION;
                 new Audio("assets/Platsch.wav").play();
                 console.log("platsch");
+                return true;
             }
+            return false;
         }
         drawInteraction() {
             Pond.crc.strokeStyle = "#374161";
@@ -302,7 +338,9 @@ var Pond;
                 this.position = { x: this.startPosition.x, y: this.startPosition.y };
             }
         }
-        interact(_hitPosition) { }
+        interact(_hitPosition) {
+            return false;
+        }
     }
     Pond.Petal = Petal;
 })(Pond || (Pond = {}));
@@ -316,6 +354,7 @@ var Pond;
     btnNewBird.addEventListener("click", addRandomBird);
     let moveables = [];
     let lilyPads = [];
+    let foods = [];
     let background;
     Pond.crc.fillStyle = "#c0f2fa";
     Pond.crc.fillRect(0, 0, Pond.crc.canvas.width, Pond.crc.canvas.height);
@@ -336,11 +375,15 @@ var Pond;
     function handleClick(_event) {
         let hit = { x: _event.offsetX, y: _event.offsetY };
         for (let moveable of moveables) {
-            moveable.interact(hit);
+            if (moveable.interact(hit))
+                return;
         }
         for (let lilyPad of lilyPads) {
-            lilyPad.interact(hit);
+            if (lilyPad.interact(hit))
+                return;
         }
+        //if (x und y nicht auf lilypad oder bird){}
+        addFood(_event);
     }
     function drawHills(_position, _min, _max, color) {
         let stepMin = 115;
@@ -505,6 +548,12 @@ var Pond;
         const direction = Math.random() < 0.5;
         moveables.push(new Pond.Bird({ x, y }, size, "walkingBird", color, direction));
     }
+    function addFood(_event) {
+        let x = _event.offsetX;
+        let y = _event.offsetY;
+        foods.push(new Pond.Food({ x, y }, 1, Math.random() > 0.5));
+        console.log("addFood geht");
+    }
     function drawPetals() {
         // for having multiple petals
         for (let i = 0; i < 30; i++) {
@@ -524,6 +573,9 @@ var Pond;
         Pond.crc.putImageData(background, 0, 0);
         for (let lilyPad of lilyPads) {
             lilyPad.draw();
+            for (let food of foods) {
+                food.draw();
+            }
         }
         for (let i = 0; i < moveables.length; i++) {
             moveables[i].move();
@@ -605,7 +657,9 @@ var Pond;
             Pond.crc.fill();
             Pond.crc.restore();
         }
-        interact(_hitPosition) { }
+        interact(_hitPosition) {
+            return false;
+        }
     }
     Pond.Reed = Reed;
 })(Pond || (Pond = {}));
@@ -648,7 +702,9 @@ var Pond;
             Pond.crc.fill();
             Pond.crc.restore();
         }
-        interact(_hitPosition) { }
+        interact(_hitPosition) {
+            return false;
+        }
     }
     Pond.Stone = Stone;
 })(Pond || (Pond = {}));

@@ -142,7 +142,7 @@ namespace Pond {
     }
 
     public interact(_hitPosition: Vector) {
-      if (this.type != "swimmingBird" && this.type != "walkingBird") return;
+      if (this.type != "swimmingBird" && this.type != "walkingBird") return false;
 
       if (
         _hitPosition.x >= this.position.x - 57 &&
@@ -154,7 +154,9 @@ namespace Pond {
         this.beakOpen = this.BEAK_OPEN_DURATION;
         new Audio("assets/Quack.wav").play();
         console.log("geht");
+        return true;
       }
+      return false;
     }
 
     private drawInteraction() {

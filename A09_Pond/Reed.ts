@@ -86,6 +86,8 @@ namespace Pond {
       crc.restore();
     }
 
-    public interact(_hitPosition: Pond.Vector): void {}
+    public interact(_hitPosition: Pond.Vector) {
+      return false;
+    }
   }
 }

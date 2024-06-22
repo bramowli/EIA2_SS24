@@ -10,6 +10,6 @@ namespace Pond {
       this.mirror = _mirror;
     }
     public abstract draw(): void;
-    public abstract interact(_hitPosition: Vector): void;
+    public abstract interact(_hitPosition: Vector): boolean;
   }
 }

@@ -38,6 +38,8 @@ namespace Pond {
       }
     }
 
-    public interact(_hitPosition: Vector): void {}
+    public interact(_hitPosition: Vector) {
+      return false;
+    }
   }
 }

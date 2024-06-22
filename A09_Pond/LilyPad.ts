@@ -49,7 +49,9 @@ namespace Pond {
         this.splashing = this.SPLASH_DURATION;
         new Audio("assets/Platsch.wav").play();
         console.log("platsch");
+        return true;
       }
+      return false;
     }
 
     private drawInteraction() {

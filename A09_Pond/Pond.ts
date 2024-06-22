@@ -13,6 +13,7 @@ namespace Pond {
 
   let moveables: Moveable[] = [];
   let lilyPads: LilyPad[] = [];
+  let foods: Food[] = [];
 
   let background: ImageData;
 
@@ -28,6 +29,7 @@ namespace Pond {
     drawStones();
     drawLilyPads();
     drawReeds();
+
     background = crc.getImageData(0, 0, canvas.width, canvas.height);
 
     drawBirds();
@@ -39,11 +41,13 @@ namespace Pond {
   function handleClick(_event: MouseEvent) {
     let hit: Vector = { x: _event.offsetX, y: _event.offsetY };
     for (let moveable of moveables) {
-      moveable.interact(hit);
+      if (moveable.interact(hit)) return;
     }
     for (let lilyPad of lilyPads) {
-      lilyPad.interact(hit);
+      if (lilyPad.interact(hit)) return;
     }
+    //if (x und y nicht auf lilypad oder bird){}
+    addFood(_event);
   }
 
   function drawHills(_position: Vector, _min: number, _max: number, color: string): void {
@@ -245,6 +249,13 @@ namespace Pond {
     moveables.push(new Bird({ x, y }, size, "walkingBird", color, direction));
   }
 
+  function addFood(_event: MouseEvent) {
+    let x = _event.offsetX;
+    let y = _event.offsetY;
+    foods.push(new Food({ x, y }, 1, Math.random() > 0.5));
+    console.log("addFood geht");
+  }
+
   function drawPetals() {
     // for having multiple petals
     for (let i: number = 0; i < 30; i++) {
@@ -264,6 +275,9 @@ namespace Pond {
     crc.putImageData(background, 0, 0);
     for (let lilyPad of lilyPads) {
       lilyPad.draw();
+      for (let food of foods) {
+        food.draw();
+      }
     }
     for (let i: number = 0; i < moveables.length; i++) {
       moveables[i].move();
